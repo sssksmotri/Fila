@@ -1,0 +1,80 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "com.google.gms.google-services"
+    id 'com.google.firebase.crashlytics'
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def keystoreProperties = new Properties()
+
+def keystorePropertiesFile = rootProject.file('key.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+} else {
+    println "WARNING: key.properties file not found. Ensure signing config variables are set in the environment or CI/CD pipeline."
+}
+
+android {
+    namespace = "app.monobox.mobile.fila"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion "25.1.8937393"
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        applicationId = "app.monobox.mobile.fila"
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
+    }
+
+    signingConfigs {
+        release {
+            def keyAliasEnv = System.getenv("ANDROID_KEY_ALIAS")
+            def keyPasswordEnv = System.getenv("ANDROID_KEY_PASSWORD")
+            def storePasswordEnv = System.getenv("ANDROID_KEY_PASSWORD")
+
+            keyAlias = keyAliasEnv ?: keystoreProperties['keyAlias']
+            keyPassword = keyPasswordEnv ?: keystoreProperties['keyPassword']
+            storePassword = storePasswordEnv ?: keystoreProperties['storePassword']
+
+            def storeFilePath = keystoreProperties['storeFile'] ?: "/builds/monobox1/app/android/cosfoodmos.jks"
+            storeFile = file(storeFilePath)
+
+            // Debug information for CI/CD
+            println "Signing Configs:"
+            println "keyAlias: ${keyAlias ?: 'NOT SET'}"
+            println "storeFile: $storeFilePath"
+            println "keyPassword: ${keyPassword ? 'SET' : 'NOT SET'}"
+            println "storePassword: ${storePassword ? 'SET' : 'NOT SET'}"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig = signingConfigs.release
+        }
+    }
+}
+
+flutter {
+    source = "../.."
+}
+
+dependencies {
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.4"
+    implementation 'com.yandex.android:maps.mobile:4.4.0-full'
+    implementation "com.google.firebase:firebase-crashlytics"
+}

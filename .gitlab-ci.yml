@@ -1,0 +1,127 @@
+stages:
+  - code_quality
+  - build_android
+  - deploy_android
+#  - build_ios
+#  - deploy_ios
+variables:
+  FLUTTER_VERSION: "stable"
+  LANG: en_US.UTF-8
+  LC_ALL: en_US.UTF-8
+  FLUTTER_IMAGE: "ghcr.io/cirruslabs/flutter:3.27.3"
+  ANDROID_COMPILE_SDK: "34"
+  ANDROID_BUILD_TOOLS: "34.0.0"
+  ANDROID_SDK_HOME: "/android-sdk"
+  GRADLE_USER_HOME: "/root/.gradle"
+  FASTLANE_DISABLE_COLORS: "1"
+  SECURE_FILES_DOWNLOAD_PATH: './'
+  ANDROID_KEY_ALIAS: "cosfoodmos"
+  ANDROID_KEY_PASSWORD: "flutter_cosfoodmos"
+  ANDROID_KEY_NAME: "cosfoodmos.jks"
+  BRANCH_NAME: "fila"
+
+
+
+default:
+  image: $FLUTTER_IMAGE
+
+# Установка зависимостей для образа
+.before_script_common:
+  before_script:
+    - apt-get update
+    - apt-get install -y libffi-dev bundler
+
+# Проверка качества кода
+code_quality:
+  stage: code_quality
+  script:
+    - set -e
+    - set -x
+    - echo "Running code quality checks..."
+    - flutter pub get
+    - flutter pub global activate dart_code_metrics
+    - dart pub global run dart_code_metrics:metrics analyze lib --reporter=json > gl-code-quality-report.json
+  artifacts:
+    reports:
+      codequality: gl-code-quality-report.json
+
+# Сборка Android
+build_android:
+  stage: build_android
+  extends: .before_script_common
+  script:
+    - apt update && apt install -y curl
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - mv /builds/monobox1/app/cosfoodmos.jks /builds/monobox1/app/android/$ANDROID_KEY_NAME
+    # Проверим, какие файлы скачались
+    - ls -la /builds/monobox1/app/
+    - ls -la /builds/monobox1/app/android/
+    - ls -la /builds/monobox1/app/android/app/
+    - flutter pub get
+    - cd android
+    - bundle install
+    - bundle exec fastlane increment_version_patch --verbose
+    - flutter build appbundle --release
+  artifacts:
+    paths:
+      - build/app/outputs/bundle/release/app-release.aab
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $BRANCH_NAME"
+
+
+
+# Деплой Android
+deploy_android:
+  stage: deploy_android
+  extends: .before_script_common
+  script:
+    - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - ls -la /builds/monobox1/app/
+    - ls -la /builds/monobox1/app/android/
+    - ls -la build/app/outputs/bundle/release/
+    - echo "$PLAY_STORE_JSON_KEY" > android/monobox-447816-424d7f00e1e8.json
+    - export GOOGLE_APPLICATION_CREDENTIALS=android/monobox-447816-424d7f00e1e8.json
+    - cd android
+    - bundle install
+    - bundle exec fastlane deploy_with_artifact --verbose
+  dependencies:
+    - build_android
+  needs:
+    - job: build_android
+      artifacts: true
+  rules:
+    -  if: "$CI_COMMIT_BRANCH == $BRANCH_NAME"
+
+#  #Сборка iOS (комментировано, если не используется)
+#build_ios:
+#  stage: build_ios
+#  tags:
+#    - macos
+#
+#  before_script:
+#    - flutter pub get
+#  script:
+#    - bundle install
+#    - bundle exec fastlane increment_version_patch --verbose
+#    - flutter clean
+#    - flutter pub get
+#    - pod install
+#    - flutter build ipa
+#  artifacts:
+#    paths:
+#      - build/ios/ipa
+#  rules:
+#    - if: '$CI_COMMIT_BRANCH == "$BRANCH_NAME"'
+#
+#  #Деплой iOS (комментировано, если не используется)
+#deploy_ios:
+#  stage: deploy_ios
+#  tags:
+#    - macos
+#  before_script:
+#    - cd ios
+#  script:
+#    - bundle install
+#    - bundle exec fastlane upload_to_testflight --verbose
+#  rules:
+#    - if: '$CI_COMMIT_BRANCH == "$BRANCH_NAME"'

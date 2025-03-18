@@ -1,0 +1,106 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/material.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../../config/themes/colors.dart';
+import '../../../../config/themes/styles.dart';
+import '../../../../core/widgets/rounded_container.dart';
+import '../widgets/edit_profile.dart';
+
+@RoutePage()
+class PersonalInformationPage extends StatelessWidget {
+  const PersonalInformationPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: _buildAppBar(context),
+      body: _buildBody(context),
+    );
+  }
+
+  PreferredSizeWidget _buildAppBar(BuildContext context) {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(56),
+      child: Container(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.white.withOpacity(.05),
+              blurRadius: 8.0,
+              offset: const Offset(
+                0.0,
+                4.0,
+              ),
+            )
+          ],
+        ),
+        child: AppBar(
+          elevation: 0.0,
+          surfaceTintColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          backgroundColor: AppColors.white,
+          titleSpacing: 0,
+          leadingWidth: (32 + 16),
+          leading: Padding(
+            padding: const EdgeInsets.only(top: 0),
+            child: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () => context.popRoute(),
+              child: Center(
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    SizedBox(
+                      width: 17.33,
+                      height: 12.67,
+                      child: SvgPicture.asset(
+                        'assets/icons/arrow_back_android.svg',
+                        width: 17.33,
+                        height: 5,
+                        colorFilter: const ColorFilter.mode(
+                          AppColors.black,
+                          BlendMode.srcIn,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          title: Padding(
+            padding: const EdgeInsets.only(top: 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  'Личная информация',
+                  style: AppStyles.headline.copyWith(height: 1),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildBody(
+    BuildContext context,
+  ) {
+    return const Column(
+      children: [
+        SizedBox(
+          height: 20,
+        ),
+        RoundedContainer(
+          child: EditProfile(),
+        ),
+      ],
+    );
+  }
+}

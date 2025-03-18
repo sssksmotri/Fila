@@ -1,0 +1,93 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Run all tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Обновление существующего приложения в тестовую ветку Google Play"
+  lane :deploy_with_artifact do
+    upload_to_play_store(
+      track: "beta",
+      aab: "/builds/monobox1/app/build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Создание нового приложения в Google Play"
+  lane :create_new_app do
+    google_play_create_app(
+      package_name: "com.example.newapp",
+      title: "Новое приложение",
+      description: "Описание нового приложения"
+    )
+  end
+
+  desc "Обновление существующего приложения в Google Play"
+  lane :update_app do
+    upload_to_play_store(
+      track: "production",
+      aab: "/builds/monobox1/app/build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Increment the version code and patch version" # пример 1.0.0 -> 1.0.1
+    lane :increment_version_patch do
+      flutter_versioner(
+        pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+        version_component: "version_code"
+      )
+
+
+      flutter_versioner(
+        pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+        version_component: "patch"
+      )
+    end
+
+    desc "Increment the version code and minor version" # пример 1.0.0 -> 1.1.0
+    lane :increment_version_minor do
+      flutter_versioner(
+        pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+        version_component: "version_code"
+      )
+
+
+      flutter_versioner(
+        pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+        version_component: "minor"
+      )
+    end
+    desc "Increment the version code and major version" # пример 1.0.0 -> 2.0.0
+    lane :increment_version_major do
+      flutter_versioner(
+        pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+        version_component: "version_code"
+      )
+
+
+      flutter_versioner(
+        pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+        version_component: "major"
+      )
+    end
+end

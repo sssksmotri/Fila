@@ -1,0 +1,73 @@
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Синхронизация сертификатов и профилей через Match"
+  lane :sync_certificates do
+    match(type: "appstore")
+  end
+
+
+
+
+
+  desc "Upload IPA to App Store"
+    lane :upload_to_testflight do
+      match(type: "appstore")
+      upload_to_app_store(
+        ipa: "/build/ios/ipa/monobox.ipa", # Укажи путь к твоему .ipa файлу
+        skip_metadata: true,          # Пропустить ввод метаданных
+        skip_screenshots: true        # Пропустить загрузку скриншотов
+      )
+    end
+
+
+  desc "Сборка и загрузка в App Store"
+  lane :deploy_to_appstore do
+    sync_certificates
+    build_app(scheme: "Runner")
+    upload_to_app_store
+  end
+
+  desc "Increment the version code and patch version" # пример 1.0.0 -> 1.0.1
+      lane :increment_version_patch do
+        flutter_versioner(
+          pubspec_file_path: "/Users/artemd./Downloads/FLUTTER_PIZZA-fastlane_test/pubspec.yaml",
+          version_component: "version_code"
+        )
+
+
+        flutter_versioner(
+          pubspec_file_path: "/Users/artemd./Downloads/FLUTTER_PIZZA-fastlane_test/pubspec.yaml",
+          version_component: "patch"
+        )
+      end
+
+      desc "Increment the version code and minor version" # пример 1.0.0 -> 1.1.0
+      lane :increment_version_minor do
+        flutter_versioner(
+          pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+          version_component: "version_code"
+        )
+
+
+        flutter_versioner(
+          pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+          version_component: "minor"
+        )
+      end
+      desc "Increment the version code and major version" # пример 1.0.0 -> 2.0.0
+      lane :increment_version_major do
+        flutter_versioner(
+          pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+          version_component: "version_code"
+        )
+
+
+        flutter_versioner(
+          pubspec_file_path: "/builds/monobox1/app/pubspec.yaml",
+          version_component: "major"
+        )
+      end
+
+end
