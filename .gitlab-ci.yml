@@ -15,9 +15,9 @@ variables:
   GRADLE_USER_HOME: "/root/.gradle"
   FASTLANE_DISABLE_COLORS: "1"
   SECURE_FILES_DOWNLOAD_PATH: './'
-  ANDROID_KEY_ALIAS: "cosfoodmos"
-  ANDROID_KEY_PASSWORD: "flutter_cosfoodmos"
-  ANDROID_KEY_NAME: "cosfoodmos.jks"
+  ANDROID_KEY_ALIAS: "fila"
+  ANDROID_KEY_PASSWORD: "flutter_fila"
+  ANDROID_KEY_NAME: "fila.jks"
   BRANCH_NAME: "fila"
 
 

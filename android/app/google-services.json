@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "149418252701",
-    "project_id": "cosfoodmos-2a9af",
-    "storage_bucket": "cosfoodmos-2a9af.firebasestorage.app"
+    "project_number": "817509868549",
+    "project_id": "fila-21017",
+    "storage_bucket": "fila-21017.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:149418252701:android:f3b8bdfb8af7a7cddbf774",
+        "mobilesdk_app_id": "1:817509868549:android:de43361679c8a19fd5e86c",
         "android_client_info": {
-          "package_name": "app.monobox.mobile.cosfudmos"
+          "package_name": "app.monobox.mobile.fila"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAo9Ke1vtgwC2Nrr8MCrFKMYeFN46fhMqk"
+          "current_key": "AIzaSyA-DAv70g7koU1JlQ11Q1EqlvbPE5TtW3s"
         }
       ],
       "services": {

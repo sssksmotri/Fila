@@ -50,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAo9Ke1vtgwC2Nrr8MCrFKMYeFN46fhMqk',
-    appId: '1:149418252701:android:f3b8bdfb8af7a7cddbf774',
-    messagingSenderId: '149418252701',
-    projectId: 'cosfoodmos-2a9af',
-    storageBucket: 'cosfoodmos-2a9af.firebasestorage.app',
+    apiKey: 'AIzaSyA-DAv70g7koU1JlQ11Q1EqlvbPE5TtW3s',
+    appId: '1:817509868549:android:de43361679c8a19fd5e86c',
+    messagingSenderId: '817509868549',
+    projectId: 'fila-21017',
+    storageBucket: 'fila-21017.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDhYxHRqWuJQskXkj0aIEG92wNacGdGWXY',
-    appId: '1:149418252701:ios:67425a40735b143bdbf774',
-    messagingSenderId: '149418252701',
-    projectId: 'cosfoodmos-2a9af',
-    storageBucket: 'cosfoodmos-2a9af.firebasestorage.app',
-    iosBundleId: 'app.monobox.mobile.cosfudmos',
+    apiKey: 'AIzaSyDBrCyOvt3KcI2gcP0aHFKKPYsH20-Dxm4',
+    appId: '1:817509868549:ios:437b0bf5d4fada58d5e86c',
+    messagingSenderId: '817509868549',
+    projectId: 'fila-21017',
+    storageBucket: 'fila-21017.firebasestorage.app',
+    iosBundleId: 'app.monobox.mobile.fila',
   );
 
 }

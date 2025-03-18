@@ -1,4 +1,4 @@
-package app.monobox.mobile.cosfudmos
+package app.monobox.mobile.fila
 
 import androidx.annotation.NonNull
 import io.flutter.embedding.android.FlutterActivity
