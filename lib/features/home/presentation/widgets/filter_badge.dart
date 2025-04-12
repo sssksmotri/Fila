@@ -22,6 +22,36 @@ class FilterBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget? iconWidget;
+
+
+    if (icon != null && icon!.trim().isNotEmpty) {
+      if (icon!.startsWith('&#')) {
+        iconWidget = SizedBox(
+          width: 16,
+          height: 24,
+          child: HtmlWidget(icon!),
+        );
+      } else if (icon!.contains('.svg')) {
+        iconWidget = SizedBox(
+          width: 16,
+          height: 24,
+          child: SvgPicture.network(icon!),
+        );
+      } else {
+        iconWidget = SizedBox(
+          width: 16,
+          height: 24,
+          child: Image.network(
+            icon!,
+            errorBuilder: (context, error, stackTrace) {
+              return const SizedBox.shrink();
+            },
+          ),
+        );
+      }
+    }
+
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
@@ -29,49 +59,14 @@ class FilterBadge extends StatelessWidget {
       ),
       height: 36,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(
-            AppStyles.radiusBlock,
-          ),
-        ),
-        //color: !isActive ? color : AppColors.dark,
-        //color: !isActive ? AppColors.superLight : AppColors.dark,
+        borderRadius: BorderRadius.all(Radius.circular(AppStyles.radiusBlock)),
         color: !isActive ? AppColors.superLight : color,
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (icon != null && icon!.startsWith('&#'))
-            SizedBox(
-              width: 16,
-              height: 24,
-              child: HtmlWidget(icon!),
-            ),
-          if (icon != null && !icon!.startsWith('&#') && !icon!.contains('.svg'))
-            SizedBox(
-              width: 16,
-              height: 24,
-              child: icon != null
-                  ? Image.network(
-                icon!,
-                errorBuilder: (context, error, stackTrace) {
-                  return SizedBox.shrink();
-                },
-              )
-                  : SizedBox.shrink(),
-            ),
-          if (icon != null && icon!.contains('.svg'))
-            SizedBox(
-              width: 16,
-              height: 24,
-              child: SvgPicture.network(
-                icon!,
-              ),
-            ),
-          if (icon != null)
-            const SizedBox(
-              width: 4,
-            ),
+          if (iconWidget != null) iconWidget,
+          if (iconWidget != null) const SizedBox(width: 4),
           Text(
             text,
             style: AppStyles.callout.copyWith(
@@ -84,3 +79,4 @@ class FilterBadge extends StatelessWidget {
     );
   }
 }
+
