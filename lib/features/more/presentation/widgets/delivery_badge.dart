@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../config/themes/colors.dart';
 import '../../../../config/themes/styles.dart';
 
@@ -20,17 +19,14 @@ class DeliveryBadge extends StatelessWidget {
         horizontal: 12,
         vertical: 4,
       ),
-      height: 30,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
-          Radius.circular(
-            AppStyles.radiusElement,
-          ),
+          Radius.circular(AppStyles.radiusElement),
         ),
         color: color.withOpacity(.1),
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
+      child: Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Container(
             width: 10,
@@ -40,11 +36,10 @@ class DeliveryBadge extends StatelessWidget {
               shape: BoxShape.circle,
             ),
           ),
-          const SizedBox(
-            width: 6,
-          ),
+          const SizedBox(width: 6),
           Text(
             text,
+            softWrap: true,
             style: AppStyles.footnote.copyWith(
               color: AppColors.dark,
             ),
