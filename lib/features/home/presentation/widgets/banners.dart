@@ -40,7 +40,7 @@ class Banners extends StatelessWidget {
             options: CarouselOptions(
               //enableInfiniteScroll: true,
               disableCenter: true,
-              height: 125.0,
+              height: 200.0,
               showIndicator: false,
               //viewportFraction: 325 / MediaQuery.of(context).size.width,
               enlargeStrategy: CenterPageEnlargeStrategy.height,

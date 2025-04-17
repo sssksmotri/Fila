@@ -18,7 +18,7 @@ class TextSwitcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 38,
+      height: 48,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(
         horizontal: 4,
@@ -43,7 +43,7 @@ class TextSwitcher extends StatelessWidget {
                       }
                     },
                     child: Container(
-                      height: 30,
+                      height: 40,
                       decoration: BoxDecoration(
                         color: items.indexOf(i) == selectedIndex ? AppColors.white : AppColors.superLight,
                         borderRadius: BorderRadius.all(

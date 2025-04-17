@@ -41,12 +41,10 @@ class BasketInfoBloc extends Bloc<BasketInfoEvent, BasketInfoState> {
           ),
         );
       }
-    } catch (message) {
-      emit(
-        BasketInfoState.error(
-          message.toString(),
-        ),
-      );
+    } catch (e, stackTrace) {
+      print('Error: $e');
+      print('Stack trace: $stackTrace');
+      emit(BasketInfoState.error(e.toString()));
     }
   }
 }

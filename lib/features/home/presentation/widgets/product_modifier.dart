@@ -17,6 +17,10 @@ class ProductModifier extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCardStateCubit, ProductCardStateState>(
       builder: (context, state) {
+        print('-- ProductModifier: modifiers count = ${product.modifiers.length}');
+        for (var m in product.modifiers) {
+          print('   • modifier: type=${m.type}, title=${m.title}');
+        }
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +67,7 @@ class ProductModifier extends StatelessWidget {
                 );
               }
               if (modifier.type == 'checkbox') {
-                Container(
+              return  Container(
                   padding: const EdgeInsets.only(bottom: 12),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,

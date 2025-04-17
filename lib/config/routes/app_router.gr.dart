@@ -353,13 +353,13 @@ class AboutPaymentsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AboutPoliticsRoute]
+/// [AboutPoliticsPage]
 class AboutPoliticsRoute extends PageRouteInfo<void> {
   const AboutPoliticsRoute({List<PageRouteInfo>? children})
       : super(
-    AboutPoliticsRoute.name,
-    initialChildren: children,
-  );
+          AboutPoliticsRoute.name,
+          initialChildren: children,
+        );
 
   static const String name = 'AboutPoliticsRoute';
 

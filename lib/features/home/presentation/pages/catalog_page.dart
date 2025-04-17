@@ -455,6 +455,13 @@ class _CatalogPageState extends State<CatalogPage> {
                                   children: [
                                     BlocBuilder<BasketInfoBloc, BasketInfoState>(
                                       builder: (context, state) {
+                                        state.maybeWhen(
+                                          loading: () => print("BasketInfoBloc: loading state"),
+                                          success: (basketInfo) => print("BasketInfoBloc: success, total = ${basketInfo.totalInfo.total}"),
+                                          error: (message) => print("BasketInfoBloc: error, message = $message"),
+                                          orElse: () => print("BasketInfoBloc: other state"),
+                                        );
+
                                         return Text(
                                           state.maybeWhen(
                                             orElse: () => '...',
@@ -498,7 +505,7 @@ class _CatalogPageState extends State<CatalogPage> {
                                         child: Text(
                                           state.maybeWhen(
                                             orElse: () => 'В корзину',
-                                            success: (basketInfo) => basketInfo.warnings.isEmpty ? 'В корзину' : basketInfo.warnings[0],
+                                            success: (basketInfo) => basketInfo.warnings.isEmpty ? 'В корзину' : basketInfo.warnings[0],
                                           ),
                                         ),
                                       );

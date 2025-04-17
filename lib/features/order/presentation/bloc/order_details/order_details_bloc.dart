@@ -36,10 +36,12 @@ class OrderDetailsBloc extends Bloc<OrderDetailsEvent, OrderDetailsState> {
           ),
         );
       }
-    } catch (message) {
+    } catch (e, stackTrace) {
+      print('Исключение: $e');
+      print('StackTrace: $stackTrace');
       emit(
         OrderDetailsState.error(
-          message.toString(),
+          '$e',
         ),
       );
     }

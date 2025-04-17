@@ -13,7 +13,7 @@ class OrderDetailsStatusEntity extends Equatable {
   final String? title;
   final String? subtitle;
   final bool active;
-  final String date;
+  final String? date;
 
   @override
   List<Object?> get props => [

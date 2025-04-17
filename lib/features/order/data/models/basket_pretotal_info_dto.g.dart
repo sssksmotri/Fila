@@ -9,6 +9,6 @@ part of 'basket_pretotal_info_dto.dart';
 BasketPretotalnfoDto _$BasketPretotalnfoDtoFromJson(
         Map<String, dynamic> json) =>
     BasketPretotalnfoDto(
-      title: json['title'] as String,
-      value: json['value'] as String,
+      title: json['title'] as String?,
+      value: json['value'] as String?,
     );

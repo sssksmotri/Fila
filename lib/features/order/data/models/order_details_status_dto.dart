@@ -21,7 +21,7 @@ class OrderDetailsStatusDto {
   final String? subtitle;
   @JsonKey(defaultValue: false)
   final bool active;
-  final String date;
+  final String? date;
 
   factory OrderDetailsStatusDto.fromJson(Map<String, dynamic> json) => _$OrderDetailsStatusDtoFromJson(json);
 }

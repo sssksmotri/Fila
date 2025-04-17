@@ -60,7 +60,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   @override
   void initState() {
     sheetController = SheetController();
-    cashPropouseTextController = TextEditingController()..addListener(_setCashPropouse);
+    cashPropouseTextController = TextEditingController();
     promoTextController = TextEditingController()
       ..setText(
           (getIt<BasketBloc>().state is BasketLoaded && (getIt<BasketBloc>().state as BasketLoaded).basket.promocode != null) ? (getIt<BasketBloc>().state as BasketLoaded).basket.promocode! : '');
@@ -68,12 +68,11 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   }
 
   @override
-  void dispose() {
-    cashPropouseTextController.removeListener(_setCashPropouse);
-    cashPropouseTextController.dispose();
-    promoTextController.dispose();
-    super.dispose();
-  }
+   void dispose() {
+      cashPropouseTextController.dispose();
+      promoTextController.dispose();
+      super.dispose();
+     }
 
   void _setCashPropouse() {
     getIt<BasketBloc>().add(SetMoneyChange(moneyChange: cashPropouseTextController.text));

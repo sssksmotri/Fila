@@ -7,8 +7,8 @@ part of 'order_dto.dart';
 // **************************************************************************
 
 OrderDto _$OrderDtoFromJson(Map<String, dynamic> json) => OrderDto(
-      id: json['id'] as int,
-      number: json['number'] as String?,
+      id: (json['id'] as num).toInt(),
+      number: _numberFromJson(json['number']),
       status: json['status'] as String,
       totalPrice: (json['total_price'] as num).toDouble(),
       createdAt: json['created_at'] as String,
