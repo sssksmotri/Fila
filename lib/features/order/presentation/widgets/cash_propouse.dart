@@ -7,13 +7,13 @@ import '../../../../config/themes/styles.dart';
 import '../../../../core/widgets/input_text.dart';
 
 class CashPropouse extends StatelessWidget {
+  final TextEditingController controller;
+  final void Function(String)? onSubmitted;
   const CashPropouse({
     super.key,
     required this.controller,
+    this.onSubmitted,
   });
-
-  final TextEditingController controller;
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -22,6 +22,7 @@ class CashPropouse extends StatelessWidget {
         controller: controller,
         hintText: 'С какой суммы нужна сдача?',
         keyboardType: TextInputType.number,
+        onSubmitted: onSubmitted,
       ),
     );
 

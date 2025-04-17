@@ -78,7 +78,7 @@ class OrderRepositoryImpl implements OrderRepository {
                     title: p.title,
                     subtitle: p.subtitle,
                     active: p.active,
-                    date: p.date,
+                    date: p.date??'',
                   ))
               .toList(),
           products: order.products

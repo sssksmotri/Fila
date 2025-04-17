@@ -407,7 +407,7 @@ class HomePage extends StatelessWidget {
                 AppStyles.smallVGap,
                 const SizedBox(
                   width: double.infinity,
-                  height: 125,
+                  height: 200,
                   child: Banners(),
                 ),
                 AppStyles.xxsmall20VGap,

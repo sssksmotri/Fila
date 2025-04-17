@@ -87,9 +87,14 @@ class _OrderDetailsState extends State<OrderDetails> {
                   orderTimeLineItems: [
                     ...widget.order.statuses.map(
                       (status) {
-                        final date = DateFormat('yyyy-MM-dd HH:mm:ss').parse(status.date);
+                        final dateStr = status.date;
+                        final time = dateStr != null && dateStr.isNotEmpty
+                            ? DateFormat("hh:mm").format(
+                          DateFormat('yyyy-MM-dd HH:mm:ss').parse(dateStr),
+                        )
+                            : 'No time';
                         return OrderTimeLineItem(
-                          time: DateFormat("hh:mm").format(date),
+                          time: time,
                           title: status.title ?? '',
                           subTitle: status.subtitle ?? '',
                           isInactive: !status.active,

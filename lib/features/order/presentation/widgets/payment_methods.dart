@@ -7,6 +7,7 @@ import '../../../../config/themes/colors.dart';
 import '../../../../config/themes/styles.dart';
 import '../../../../core/widgets/rounded_container.dart';
 import '../../../../injection_container.dart';
+import '../../../basket/presentation/bloc/basket/basket_bloc.dart';
 import '../bloc/create_order_state_cubit/create_order_state_cubit.dart';
 import '../bloc/payment_methods/payment_methods_bloc.dart';
 import '../models/create_order_state.dart';
@@ -157,6 +158,9 @@ class PaymentMethods extends StatelessWidget {
                     ),
                     child: CashPropouse(
                       controller: cashPropouseTextcontroller,
+                      onSubmitted: (value) {
+                      context.read<BasketBloc>().add(SetMoneyChange(moneyChange: value));
+                      }
                     ),
                   );
                 }

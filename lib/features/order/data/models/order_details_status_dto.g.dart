@@ -9,9 +9,9 @@ part of 'order_details_status_dto.dart';
 OrderDetailsStatusDto _$OrderDetailsStatusDtoFromJson(
         Map<String, dynamic> json) =>
     OrderDetailsStatusDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String?,
       subtitle: json['subtitle'] as String?,
       active: json['active'] as bool? ?? false,
-      date: json['date'] as String,
+      date: json['date'] as String?,
     );

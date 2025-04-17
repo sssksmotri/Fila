@@ -89,13 +89,13 @@ class BasketRepositoryImpl implements BasketRepository {
           ),
           pretotalInfo: basketInfo.pretotalInfo
               .map((pretotalInfo) => BasketPretotalnfoEntity(
-                    title: pretotalInfo.title,
-                    value: pretotalInfo.value,
+                    title: pretotalInfo.title??"",
+                    value: pretotalInfo.value??"",
                   ))
               .toList(),
           bonusInfo: BasketPretotalnfoEntity(
-            title: basketInfo.bonusInfo.title,
-            value: basketInfo.bonusInfo.value,
+            title: basketInfo.bonusInfo.title??"",
+            value: basketInfo.bonusInfo.value??"",
           ),
           warnings: basketInfo.warnings,
         ),

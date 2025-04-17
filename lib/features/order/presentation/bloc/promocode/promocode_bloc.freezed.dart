@@ -12,7 +12,7 @@ part of 'promocode_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$PromocodeEvent {
@@ -50,7 +50,9 @@ mixin _$PromocodeEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PromocodeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PromocodeEventCopyWith<PromocodeEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -74,6 +76,8 @@ class _$PromocodeEventCopyWithImpl<$Res, $Val extends PromocodeEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of PromocodeEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -107,6 +111,8 @@ class __$$GetPromocodeImplCopyWithImpl<$Res>
       _$GetPromocodeImpl _value, $Res Function(_$GetPromocodeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PromocodeEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -135,7 +141,7 @@ class _$GetPromocodeImpl implements _GetPromocode {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetPromocodeImpl &&
@@ -146,7 +152,9 @@ class _$GetPromocodeImpl implements _GetPromocode {
   @override
   int get hashCode => Object.hash(runtimeType, promocode);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PromocodeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GetPromocodeImplCopyWith<_$GetPromocodeImpl> get copyWith =>
@@ -214,8 +222,11 @@ abstract class _GetPromocode implements PromocodeEvent {
 
   @override
   String get promocode;
+
+  /// Create a copy of PromocodeEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetPromocodeImplCopyWith<_$GetPromocodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -290,6 +301,9 @@ class _$PromocodeStateCopyWithImpl<$Res, $Val extends PromocodeState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -306,6 +320,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -319,7 +336,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -420,6 +437,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -433,7 +453,7 @@ class _$LoadingImpl implements _Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
@@ -537,6 +557,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -565,7 +587,7 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -576,7 +598,9 @@ class _$SuccessImpl implements _Success {
   @override
   int get hashCode => Object.hash(runtimeType, promocodeInfo);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -661,7 +685,10 @@ abstract class _Success implements PromocodeState {
   const factory _Success(final PromocodeEntity promocodeInfo) = _$SuccessImpl;
 
   PromocodeEntity get promocodeInfo;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -683,6 +710,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -711,7 +740,7 @@ class _$ErrorImpl implements _Error {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
@@ -721,7 +750,9 @@ class _$ErrorImpl implements _Error {
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
@@ -806,7 +837,10 @@ abstract class _Error implements PromocodeState {
   const factory _Error(final StateError error) = _$ErrorImpl;
 
   StateError get error;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of PromocodeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

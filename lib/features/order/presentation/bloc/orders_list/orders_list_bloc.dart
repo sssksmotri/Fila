@@ -21,25 +21,30 @@ class OrdersListBloc extends Bloc<OrdersListEvent, OrdersListState> {
     Emitter<OrdersListState> emit,
   ) async {
     try {
+      print('Загрузка заказов...');
       emit(const OrdersListState.loading());
 
       final dataState = await _getOrdersUsecase();
 
       if (dataState is DataSuccess && dataState.data != null) {
+        print('Успех: ${dataState.data!.length} заказов');
         emit(OrdersListState.success(dataState.data!));
       }
 
       if (dataState is DataFailed) {
+        print('Ошибка: ${dataState.error?.message}');
         emit(
           OrdersListState.error(
             dataState.error?.message ?? '',
           ),
         );
       }
-    } catch (message) {
+    } catch (e, stackTrace) {
+      print('Исключение: $e');
+      print('StackTrace: $stackTrace');
       emit(
         OrdersListState.error(
-          message.toString(),
+          '$e',
         ),
       );
     }

@@ -21,6 +21,7 @@ class OrderDto {
   });
 
   final int id;
+  @JsonKey(fromJson: _numberFromJson)
   final String? number;
   final String status;
   final double totalPrice;
@@ -29,4 +30,12 @@ class OrderDto {
   final List<OrderProductDto> products;
 
   factory OrderDto.fromJson(Map<String, dynamic> json) => _$OrderDtoFromJson(json);
+}
+String? _numberFromJson(dynamic value) {
+  if (value is int) {
+    return value.toString();
+  } else if (value is String) {
+    return value;
+  }
+  return null;
 }
