@@ -7,7 +7,7 @@ class ShopEntity extends Equatable {
   final double lat;
   final double lon;
   final String? openTime;
-  final String? waitingTime;
+  final int? waitingTime;
   final List<String>? workTime;
   final String? distance;
 
@@ -31,7 +31,7 @@ class ShopEntity extends Equatable {
         lon,
         openTime,
         waitingTime,
-        waitingTime,
+        workTime,
         distance,
       ];
 }

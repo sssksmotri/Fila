@@ -1,15 +1,15 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:monobox/config/themes/colors.dart';
-import 'package:monobox/core/widgets/text_switcher.dart';
-
+import '../../../../config/themes/colors.dart';
 import '../../../../config/themes/styles.dart';
 import '../../../../core/widgets/custom_checkbox.dart';
-import '../../domain/entities/product_entity.dart';
+import '../../../../core/widgets/text_switcher.dart';
 import '../bloc/product_card_state/product_card_state_cubit.dart';
+import '../../domain/entities/product_entity.dart';
 
 class ProductModifier extends StatelessWidget {
-  const ProductModifier({super.key, required this.product});
+  const ProductModifier({Key? key, required this.product}) : super(key: key);
 
   final ProductEntity product;
 
@@ -17,106 +17,273 @@ class ProductModifier extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCardStateCubit, ProductCardStateState>(
       builder: (context, state) {
-        print('-- ProductModifier: modifiers count = ${product.modifiers.length}');
-        for (var m in product.modifiers) {
-          print('   • modifier: type=${m.type}, title=${m.title}');
-        }
+        final cubit = context.read<ProductCardStateCubit>();
+        final modifiers = product.modifiers
+            .where((m) => m.type == 'checkbox' || m.type == 'switcher')
+            .toList();
+        if (modifiers.isEmpty) return const SizedBox.shrink();
+
         return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ...product.modifiers.where((element) => element.type != 'is_half_pizza').map((modifier) {
-              if (modifier.type == 'switcher') {
-                if (context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).isEmpty) {
-                  context.read<ProductCardStateCubit>().addModifier(modifier.items[0]);
-                }
+          children: modifiers.map((modifier) {
+            final selected = cubit.selectedModifiersByParent(modifier);
 
-                int selectedIndex = 0;
-                for (int i = 0; i < modifier.items.length; i++) {
-                  if (context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).contains(modifier.items[i])) {
-                    selectedIndex = i;
-                    print('selectedIndex = $selectedIndex');
-                  }
-                  // context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).map((item) {
+            if (modifier.type == 'switcher') {
 
-                  // }).toList();
-                  // context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).map((item) {
-                  //   print(context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).length);
-                  //   if (context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).length > 0) {
-                  //     print(context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier)[0].title);
-                  //   }
-
-                  //   print(context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).contains(item));
-
-                  //   if (context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).contains(item)) {
-                  //     selectedIndex = i;
-                  //     print('selectedIndex = $selectedIndex');
-                  //   }
-                  // }).toList();
-                }
-                print('selectedIndex = $selectedIndex');
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 24),
-                  child: TextSwitcher(
-                    items: modifier.items.map((item) => item.title).toList(),
-                    onTap: (itemIndex) {
-                      context.read<ProductCardStateCubit>().addUniqModifier(modifier.items[itemIndex], modifier.items);
-                    },
-                    selectedIndex: selectedIndex,
-                  ),
-                );
+              if (selected.isEmpty && modifier.items.isNotEmpty) {
+                cubit.addModifier(modifier.items[0]);
               }
-              if (modifier.type == 'checkbox') {
-              return  Container(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
+
+
+              int selectedIndex = 0;
+              for (int i = 0; i < modifier.items.length; i++) {
+                if (selected.contains(modifier.items[i])) {
+                  selectedIndex = i;
+                  break;
+                }
+              }
+
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: TextSwitcher(
+                  items: modifier.items.map((item) => item.title).toList(),
+                  onTap: (itemIndex) {
+                    cubit.addUniqModifier(modifier.items[itemIndex], modifier.items);
+                  },
+                  selectedIndex: selectedIndex,
+                ),
+              );
+            }
+
+
+            final hasImages = modifier.items.any((i) => i.image != null && i.image!.isNotEmpty);
+
+            return Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(modifier.title, style: AppStyles.title3),
+                        if (modifier.maxQuantity != null)
                           Text(
-                            modifier.title,
-                            style: AppStyles.footnote,
+                            '${selected.length} из ${modifier.maxQuantity}',
+                            style: AppStyles.caption1.copyWith(color: AppColors.gray),
                           ),
-                          if (modifier.maxQuantity != null)
-                            Text(
-                              '${context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).length} из ${modifier.maxQuantity}',
-                              style: AppStyles.caption1.copyWith(
-                                color: AppColors.gray,
-                              ),
-                            )
-                        ],
-                      ),
-                      AppStyles.xsmall12VGap,
-                      ...modifier.items.map(
-                        (modifierItem) => Padding(
-                          padding: const EdgeInsets.only(bottom: 12),
-                          child: CustomCheckBox(
-                            disabled: modifier.maxQuantity != null && context.read<ProductCardStateCubit>().selectedModifiersByParent(modifier).length >= modifier.maxQuantity!,
-                            label: modifierItem.title,
-                            sufix: Text(
-                              modifierItem.price != null ? '+${modifierItem.price} ₽' : '',
-                              style: AppStyles.footnote,
-                            ),
-                            onSelect: (active) {
-                              if (active) {
-                                context.read<ProductCardStateCubit>().addModifier(modifierItem);
-                              } else {
-                                context.read<ProductCardStateCubit>().deleteModifier(modifierItem);
-                              }
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                );
-              }
-              return Container();
-            }),
-          ],
+                  const SizedBox(height: 12),
+                  Container(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: hasImages
+                          ? SizedBox(
+                        height: 230,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: modifier.items.length,
+                          itemBuilder: (context, index) {
+                            final item = modifier.items[index];
+                            final quantity = state.selectedQuantities[item.id] ?? 0;
+                            final maxQty = item.maxQuantity ?? 1;
+                            final isSelected = quantity > 0;
+                            final disabled = modifier.maxQuantity != null &&
+                                !isSelected &&
+                                selected.length >= modifier.maxQuantity!;
+
+                            return Padding(
+                              padding: const EdgeInsets.only(right: 12),
+                              child: Container(
+                                width: 150,
+                                height: 230,
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.all(Radius.circular(AppStyles.mediumRadius)),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black.withOpacity(0.05),
+                                      blurRadius: 8.0,
+                                      offset: const Offset(0.0, 4.0),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.all(Radius.circular(AppStyles.productPicRadius)),
+                                      child: CachedNetworkImage(
+                                        imageUrl: item.image ?? '',
+                                        width: 110,
+                                        height: 90,
+                                        fit: BoxFit.cover,
+                                        placeholder: (_, __) => Container(
+                                            width: 110, height: 90, color: AppColors.shimmer),
+                                        errorWidget: (_, __, ___) =>
+                                            Container(width: 110, height: 90, color: AppColors.shimmer),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    SizedBox(
+                                      height: 40,
+                                      child: Text(
+                                        item.title,
+                                        style: AppStyles.footnote,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 2),
+                                    SizedBox(
+                                      height: 24,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          if (item.price != null)
+                                            Text(
+                                              '+${item.price} ₽',
+                                              style: AppStyles.headline,
+                                            ),
+                                          if (item.weight != null) ...[
+                                            const SizedBox(width: 4),
+                                            Text(
+                                              '${item.weight} г.',
+                                              style: AppStyles.caption2,
+                                            ),
+                                          ],
+                                        ],
+                                      ),
+                                    ),
+                                    const Spacer(),
+                                    SizedBox(
+                                      width: double.infinity,
+                                      height: 26,
+                                      child: quantity == 0
+                                          ? ElevatedButton(
+                                        onPressed: !disabled ? () => cubit.incrementModifier(item) : null,
+                                        style: AppStyles.greyElevatedButton.copyWith(
+                                          padding: const MaterialStatePropertyAll(
+                                            EdgeInsets.only(left: 20, right: 16),
+                                          ),
+                                          shape: MaterialStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'Выбрать',
+                                          style: AppStyles.footnote.copyWith(
+                                            color: AppColors.darkPrimary,
+                                            height: 1,
+                                          ),
+                                        ),
+                                      )
+                                          : Container(
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                            Radius.circular(AppStyles.radiusElement),
+                                          ),
+                                          color: AppColors.superLight,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: GestureDetector(
+                                                onTap: () => cubit.decrementModifier(item),
+                                                child: Container(
+                                                  color: Colors.transparent,
+                                                  child: Center(
+                                                    child: Text(
+                                                      '−',
+                                                      style: AppStyles.callout.copyWith(
+                                                        color: AppColors.gray,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Center(
+                                                child: Text(
+                                                  '$quantity',
+                                                  style: AppStyles.footnote.copyWith(
+                                                    color: AppColors.dark,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: GestureDetector(
+                                                onTap: quantity < maxQty
+                                                    ? () => cubit.incrementModifier(item)
+                                                    : null,
+                                                child: Container(
+                                                  color: Colors.transparent,
+                                                  child: Center(
+                                                    child: Text(
+                                                      '+',
+                                                      style: AppStyles.callout.copyWith(
+                                                        color: AppColors.gray,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      )
+                          : Column(
+                        children: modifier.items.map((item) {
+                          final quantity = state.selectedQuantities[item.id] ?? 0;
+                          final isSelected = quantity > 0;
+                          final disabled = modifier.maxQuantity != null &&
+                              !isSelected &&
+                              selected.length >= modifier.maxQuantity!;
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            child: CustomCheckBox(
+                              label: item.title,
+                              sufix: Text(
+                                item.price != null ? '+${item.price} ₽' : '',
+                                style: AppStyles.footnote,
+                              ),
+                              disabled: disabled,
+                              onSelect: (active) {
+                                if (active) {
+                                  cubit.addModifier(item);
+                                } else {
+                                  cubit.deleteModifier(item);
+                                }
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).toList(),
         );
       },
     );

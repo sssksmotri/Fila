@@ -17,17 +17,31 @@ class FilialDto {
     this.distance,
     this.rezhim,
     this.rezhimToday,
+    this.statusOpened,
+    this.statusOpenedColor,
+    this.startTodayTimestamp,
+    this.endTodayTimestamp,
   });
+
   final int id;
   final int? cityId;
   @JsonKey(name: 'title')
   final String name;
-  final String? timeDelay;
+  final int? timeDelay;
   final String? distance;
   @JsonKey(name: 'coords')
   final FilialCoordinatesDto coordinates;
-  final Map<String, dynamic>? rezhim;
+  final List<Map<String, dynamic>>? rezhim;
+  @JsonKey(name: 'rezhim_today')
   final String? rezhimToday;
+  @JsonKey(name: 'status_opened')
+  final String? statusOpened;
+  @JsonKey(name: 'status_opened_color')
+  final String? statusOpenedColor;
+  @JsonKey(name: 'start_today_timestamp')
+  final int? startTodayTimestamp;
+  @JsonKey(name: 'end_today_timestamp')
+  final int? endTodayTimestamp;
 
   factory FilialDto.fromJson(Map<String, dynamic> json) => _$FilialDtoFromJson(json);
 }
@@ -43,10 +57,16 @@ class FilialCoordinatesDto {
     required this.lon,
   });
 
-  @JsonKey(name: 'latitude')
-  final String lat;
-  @JsonKey(name: 'longitude')
-  final String lon;
+  @JsonKey(name: 'latitude', fromJson: _stringToDouble)
+  final double lat;
+  @JsonKey(name: 'longitude', fromJson: _stringToDouble)
+  final double lon;
 
   factory FilialCoordinatesDto.fromJson(Map<String, dynamic> json) => _$FilialCoordinatesDtoFromJson(json);
+
+  static double _stringToDouble(dynamic value) {
+    if (value is num) return value.toDouble();
+    if (value is String) return double.parse(value);
+    throw FormatException('Expected a string or number for coordinate, got $value');
+  }
 }

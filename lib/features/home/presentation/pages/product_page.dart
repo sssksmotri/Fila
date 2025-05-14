@@ -303,14 +303,23 @@ class _ProductPageState extends State<ProductPage> {
                                               id: const Uuid().v4(),
                                               product: widget.product,
                                               quantity: 1,
-                                              addOptions: bloc.state.selectedModifiers
-                                                  .map((m) => ProductOptionEntity(
-                                                        id: m.id,
-                                                        name: m.title,
-                                                        price: m.price,
-                                                      ))
-                                                  .toList()),
-                                        ),
+                                              addOptions: bloc.state.selectedQuantities.entries
+                                                  .where((entry) => entry.value > 0)
+                                                  .expand((entry) {
+                                                final modifier = widget.product.modifiers
+                                                    .expand((m) => m.items)
+                                                    .firstWhere((item) => item.id == entry.key);
+                                                return List.filled(
+                                                  entry.value,
+                                                  ProductOptionEntity(
+                                                    id: modifier.id,
+                                                    name: modifier.title,
+                                                    price: modifier.price,
+                                                  ),
+                                                );
+                                              })
+                                                  .toList(),
+                                        ),)
                                       );
                                       //await AutoRouter.of(context).pop();
                                       // context.navigateTo(

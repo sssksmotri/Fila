@@ -4,6 +4,6 @@ part of 'product_card_state_cubit.dart';
 class ProductCardStateState with _$ProductCardStateState {
   const factory ProductCardStateState({
     required ProductEntity product,
-    @Default([]) List<ModifierItemEntity> selectedModifiers,
+    @Default({}) Map<int, int> selectedQuantities,
   }) = _ProductCardStateState;
 }

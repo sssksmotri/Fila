@@ -25,23 +25,26 @@ class DeliveryBadge extends StatelessWidget {
         ),
         color: color.withOpacity(.1),
       ),
-      child: Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: 10,
             height: 10,
+            margin: const EdgeInsets.only(top: 4),
             decoration: BoxDecoration(
               color: color,
               shape: BoxShape.circle,
             ),
           ),
           const SizedBox(width: 6),
-          Text(
-            text,
-            softWrap: true,
-            style: AppStyles.footnote.copyWith(
-              color: AppColors.dark,
+          Flexible(
+            child: Text(
+              text,
+              softWrap: true,
+              style: AppStyles.footnote.copyWith(
+                color: AppColors.dark,
+              ),
             ),
           ),
         ],

@@ -12,7 +12,7 @@ part of 'geo_available_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GeoAvailableEvent {
@@ -51,7 +51,9 @@ mixin _$GeoAvailableEvent {
   }) =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoAvailableEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeoAvailableEventCopyWith<GeoAvailableEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -75,6 +77,8 @@ class _$GeoAvailableEventCopyWithImpl<$Res, $Val extends GeoAvailableEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeoAvailableEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +117,8 @@ class __$$GetAvailableImplCopyWithImpl<$Res>
       _$GetAvailableImpl _value, $Res Function(_$GetAvailableImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeoAvailableEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -148,7 +154,7 @@ class _$GetAvailableImpl implements _GetAvailable {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetAvailableImpl &&
@@ -159,7 +165,9 @@ class _$GetAvailableImpl implements _GetAvailable {
   @override
   int get hashCode => Object.hash(runtimeType, lat, lon);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoAvailableEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GetAvailableImplCopyWith<_$GetAvailableImpl> get copyWith =>
@@ -230,8 +238,11 @@ abstract class _GetAvailable implements GeoAvailableEvent {
   double get lat;
   @override
   double get lon;
+
+  /// Create a copy of GeoAvailableEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GetAvailableImplCopyWith<_$GetAvailableImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -306,6 +317,9 @@ class _$GeoAvailableStateCopyWithImpl<$Res, $Val extends GeoAvailableState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -322,6 +336,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -335,7 +352,7 @@ class _$InitialImpl implements Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -436,6 +453,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -449,7 +469,7 @@ class _$LoadingImpl implements Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
@@ -553,6 +573,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -581,7 +603,7 @@ class _$SuccessImpl implements Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -592,7 +614,9 @@ class _$SuccessImpl implements Success {
   @override
   int get hashCode => Object.hash(runtimeType, geoAvailable);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -677,7 +701,10 @@ abstract class Success implements GeoAvailableState {
   const factory Success(final GeoAvailableEntity geoAvailable) = _$SuccessImpl;
 
   GeoAvailableEntity get geoAvailable;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -699,6 +726,8 @@ class __$$ErrorStateImplCopyWithImpl<$Res>
       _$ErrorStateImpl _value, $Res Function(_$ErrorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -727,7 +756,7 @@ class _$ErrorStateImpl implements ErrorState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorStateImpl &&
@@ -737,7 +766,9 @@ class _$ErrorStateImpl implements ErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
@@ -822,7 +853,10 @@ abstract class ErrorState implements GeoAvailableState {
   const factory ErrorState(final String message) = _$ErrorStateImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of GeoAvailableState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,14 +12,16 @@ part of 'geo_suggestion_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$GeoSuggestionState {
   List<GeoSuggestionEntity> get suggestions =>
       throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoSuggestionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $GeoSuggestionStateCopyWith<GeoSuggestionState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$GeoSuggestionStateCopyWithImpl<$Res, $Val extends GeoSuggestionState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of GeoSuggestionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -76,6 +80,8 @@ class __$$GeoSuggestionStateImplCopyWithImpl<$Res>
       $Res Function(_$GeoSuggestionStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of GeoSuggestionState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -112,7 +118,7 @@ class _$GeoSuggestionStateImpl implements _GeoSuggestionState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GeoSuggestionStateImpl &&
@@ -124,7 +130,9 @@ class _$GeoSuggestionStateImpl implements _GeoSuggestionState {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_suggestions));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of GeoSuggestionState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$GeoSuggestionStateImplCopyWith<_$GeoSuggestionStateImpl> get copyWith =>
@@ -138,8 +146,11 @@ abstract class _GeoSuggestionState implements GeoSuggestionState {
 
   @override
   List<GeoSuggestionEntity> get suggestions;
+
+  /// Create a copy of GeoSuggestionState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$GeoSuggestionStateImplCopyWith<_$GeoSuggestionStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

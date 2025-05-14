@@ -12,7 +12,7 @@ part of 'shop_location_state_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ShopLocationStateState {
@@ -22,7 +22,9 @@ mixin _$ShopLocationStateState {
   CityEntity? get city => throw _privateConstructorUsedError;
   List<ShopEntity> get shops => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShopLocationStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ShopLocationStateStateCopyWith<ShopLocationStateState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +54,8 @@ class _$ShopLocationStateStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ShopLocationStateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +117,8 @@ class __$$ShopLocationStateStateImplCopyWithImpl<$Res>
       $Res Function(_$ShopLocationStateStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ShopLocationStateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -182,7 +188,7 @@ class _$ShopLocationStateStateImpl implements _ShopLocationStateState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ShopLocationStateStateImpl &&
@@ -200,7 +206,9 @@ class _$ShopLocationStateStateImpl implements _ShopLocationStateState {
   int get hashCode => Object.hash(runtimeType, showMode, showShopMap,
       geoSuggestion, city, const DeepCollectionEquality().hash(_shops));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ShopLocationStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ShopLocationStateStateImplCopyWith<_$ShopLocationStateStateImpl>
@@ -226,8 +234,11 @@ abstract class _ShopLocationStateState implements ShopLocationStateState {
   CityEntity? get city;
   @override
   List<ShopEntity> get shops;
+
+  /// Create a copy of ShopLocationStateState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ShopLocationStateStateImplCopyWith<_$ShopLocationStateStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

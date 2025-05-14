@@ -12,7 +12,7 @@ part of 'filials_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$FilialsEvent {
@@ -76,6 +76,9 @@ class _$FilialsEventCopyWithImpl<$Res, $Val extends FilialsEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of FilialsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -92,6 +95,9 @@ class __$$GetFilialsImplCopyWithImpl<$Res>
   __$$GetFilialsImplCopyWithImpl(
       _$GetFilialsImpl _value, $Res Function(_$GetFilialsImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of FilialsEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -105,7 +111,7 @@ class _$GetFilialsImpl implements _GetFilials {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GetFilialsImpl);
   }
@@ -201,6 +207,8 @@ class __$$SearchFilialsImplCopyWithImpl<$Res>
       _$SearchFilialsImpl _value, $Res Function(_$SearchFilialsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FilialsEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -250,7 +258,7 @@ class _$SearchFilialsImpl implements _SearchFilials {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchFilialsImpl &&
@@ -263,7 +271,9 @@ class _$SearchFilialsImpl implements _SearchFilials {
   @override
   int get hashCode => Object.hash(runtimeType, cityId, address, lat, lon);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FilialsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SearchFilialsImplCopyWith<_$SearchFilialsImpl> get copyWith =>
@@ -347,7 +357,10 @@ abstract class _SearchFilials implements FilialsEvent {
   String? get address;
   double? get lat;
   double? get lon;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FilialsEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SearchFilialsImplCopyWith<_$SearchFilialsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -422,6 +435,9 @@ class _$FilialsStateCopyWithImpl<$Res, $Val extends FilialsState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -438,6 +454,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -451,7 +470,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -552,6 +571,9 @@ class __$$LoadingImplCopyWithImpl<$Res>
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -565,7 +587,7 @@ class _$LoadingImpl implements _Loading {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
@@ -669,6 +691,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -702,7 +726,7 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -713,7 +737,9 @@ class _$SuccessImpl implements _Success {
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_shops));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -798,7 +824,10 @@ abstract class _Success implements FilialsState {
   const factory _Success(final List<ShopEntity> shops) = _$SuccessImpl;
 
   List<ShopEntity> get shops;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -820,6 +849,8 @@ class __$$ErrorStateImplCopyWithImpl<$Res>
       _$ErrorStateImpl _value, $Res Function(_$ErrorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -848,7 +879,7 @@ class _$ErrorStateImpl implements _ErrorState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorStateImpl &&
@@ -858,7 +889,9 @@ class _$ErrorStateImpl implements _ErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
@@ -943,7 +976,10 @@ abstract class _ErrorState implements FilialsState {
   const factory _ErrorState(final String message) = _$ErrorStateImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of FilialsState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,7 +12,7 @@ part of 'create_order_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreateOrderState {
@@ -28,7 +28,9 @@ mixin _$CreateOrderState {
   DateTime? get deliveryTime => throw _privateConstructorUsedError;
   bool get itogoIsCollapsed => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateOrderState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CreateOrderStateCopyWith<CreateOrderState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -65,6 +67,8 @@ class _$CreateOrderStateCopyWithImpl<$Res, $Val extends CreateOrderState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CreateOrderState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -128,6 +132,8 @@ class _$CreateOrderStateCopyWithImpl<$Res, $Val extends CreateOrderState>
     ) as $Val);
   }
 
+  /// Create a copy of CreateOrderState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressEntityCopyWith<$Res>? get deliveryAddress {
@@ -174,6 +180,8 @@ class __$$CreateOrderStateImplCopyWithImpl<$Res>
       $Res Function(_$CreateOrderStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateOrderState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -285,7 +293,7 @@ class _$CreateOrderStateImpl extends _CreateOrderState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CreateOrderStateImpl &&
@@ -328,7 +336,9 @@ class _$CreateOrderStateImpl extends _CreateOrderState {
       deliveryTime,
       itogoIsCollapsed);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateOrderState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CreateOrderStateImplCopyWith<_$CreateOrderStateImpl> get copyWith =>
@@ -373,8 +383,11 @@ abstract class _CreateOrderState extends CreateOrderState {
   DateTime? get deliveryTime;
   @override
   bool get itogoIsCollapsed;
+
+  /// Create a copy of CreateOrderState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CreateOrderStateImplCopyWith<_$CreateOrderStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

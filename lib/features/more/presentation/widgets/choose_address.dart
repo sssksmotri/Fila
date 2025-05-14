@@ -221,7 +221,7 @@ class _ChooseAddressState extends State<ChooseAddress> {
                             hintStyle: AppStyles.subhead.copyWith(
                               color: AppColors.gray,
                             ),
-                            readOnly: state.address?.city?.name?.isNotEmpty == true ? false : true,
+                            /*readOnly: state.address?.city?.name?.isNotEmpty == true ? false : true,*/
                             //onSubmitted: (text) => _makeSearch(text),
                           );
                         },

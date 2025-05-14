@@ -5,7 +5,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../config/themes/colors.dart';
@@ -62,7 +61,6 @@ class ShopCard extends StatelessWidget {
                       BottomSheetAction(
                         onPressed: (context) async {
                           await Clipboard.setData(ClipboardData(text: shop.address));
-
                           if (!context.mounted) return;
                           AutoRouter.of(context).pop('clipboard');
                         },
@@ -90,7 +88,7 @@ class ShopCard extends StatelessWidget {
                           AutoRouter.of(context).pop();
                         },
                         title: Text(
-                          'Найти в 2ГИС',
+                          'Найти в 2ГИС',
                           style: AppStyles.bodyRegular.copyWith(
                             color: !Platform.isIOS ? AppColors.black : const Color(0xFF007AFF),
                           ),
@@ -98,60 +96,9 @@ class ShopCard extends StatelessWidget {
                       ),
                     ],
                     cancelAction: CancelAction(
-                      title: const Text(
-                        'Отмена',
-                      ),
+                      title: const Text('Отмена'),
                     ),
                   );
-                  // final result = await showCupertinoModalPopup(
-                  //   context: context,
-                  //   builder: (BuildContext context) {
-                  //     return CupertinoActionSheet(
-                  //       actions: [
-                  //         CupertinoActionSheetAction(
-                  //           onPressed: () async {
-                  //             await Clipboard.setData(ClipboardData(text: shop.address));
-
-                  //             if (!context.mounted) return;
-                  //             AutoRouter.of(context).pop('clipboard');
-                  //           },
-                  //           child: Text(
-                  //             'Скопировать адрес',
-                  //             style: AppStyles.bodyRegular,
-                  //           ),
-                  //         ),
-                  //         CupertinoActionSheetAction(
-                  //           onPressed: () {
-                  //             if (!context.mounted) return;
-                  //             AutoRouter.of(context).pop('basket');
-                  //           },
-                  //           child: Text(
-                  //             'Заказать самовывоз',
-                  //             style: AppStyles.bodyRegular,
-                  //           ),
-                  //         ),
-                  //         CupertinoActionSheetAction(
-                  //           onPressed: () {
-                  //             AutoRouter.of(context).pop();
-                  //           },
-                  //           child: Text(
-                  //             'Найти в 2ГИС',
-                  //             style: AppStyles.bodyRegular,
-                  //           ),
-                  //         ),
-                  //       ],
-                  //       cancelButton: CupertinoActionSheetAction(
-                  //         onPressed: () {
-                  //           AutoRouter.of(context).pop();
-                  //         },
-                  //         child: Text(
-                  //           'Отмена',
-                  //           style: AppStyles.bodyRegular,
-                  //         ),
-                  //       ),
-                  //     );
-                  //   },
-                  // );
 
                   if (result != null) {
                     if (!context.mounted) return;
@@ -159,9 +106,7 @@ class ShopCard extends StatelessWidget {
                     if (result == 'clipboard') {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text(
-                            'Адрес скопирован',
-                          ),
+                          content: Text('Адрес скопирован'),
                         ),
                       );
                     }
@@ -175,9 +120,6 @@ class ShopCard extends StatelessWidget {
             ),
           ],
         ),
-        // const SizedBox(
-        //   height: 12,
-        // ),
         Text(
           shop.address,
           style: AppStyles.headline,
@@ -198,18 +140,9 @@ class ShopCard extends StatelessWidget {
             height: 16,
           ),
         if (shop.workTime?.isNotEmpty == true)
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                shop.workTime![0],
-                style: AppStyles.footnote,
-              ),
-              Text(
-                shop.workTime![1],
-                style: AppStyles.footnote,
-              ),
-            ],
+          Text(
+            shop.workTime![0],
+            style: AppStyles.footnote,
           ),
       ],
     );

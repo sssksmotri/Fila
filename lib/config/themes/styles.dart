@@ -337,5 +337,5 @@ class AppStyles {
   static double radiusBlock = 32;
 
   static double bannerWidth = 325;
-  static double bannerHeight = 200;
+  static double bannerHeight = 165;
 }

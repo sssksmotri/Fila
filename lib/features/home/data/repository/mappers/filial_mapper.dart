@@ -2,34 +2,29 @@ import '../../../../more/domain/entities/shop_entity.dart';
 import '../../models/filial_dto.dart';
 
 class FilialMapper {
-  static ShopEntity toEntity(
-    FilialDto model,
-  ) {
-    final List<String> workTime = [];
-    model.rezhim!.forEach((k, v) => workTime.add('$k $v'));
+  static ShopEntity toEntity(FilialDto model) {
+    // Формируем список workTime из rezhim
+    final List<String> workTime = model.rezhim?.map((rezhimMap) {
+      final days = rezhimMap['days'] as String? ?? '';
+      final time = rezhimMap['time'] as String? ?? '';
+      return '$days $time';
+    }).toList() ??
+        [];
 
     return ShopEntity(
       id: model.id,
       address: model.name,
-      cityId: model.cityId!,
-      lat: double.parse(model.coordinates.lat),
-      lon: double.parse(model.coordinates.lon),
+      cityId: model.cityId ?? 0,
+      lat: model.coordinates.lat,
+      lon: model.coordinates.lon,
       openTime: model.rezhimToday,
       workTime: workTime,
       waitingTime: model.timeDelay,
       distance: model.distance,
-
-      //[model.rezhim!.map((key, value) => '')],
     );
   }
 
-  static List<ShopEntity> toEntities(
-    List<FilialDto> models,
-  ) {
-    List<ShopEntity> entities = [];
-
-    models.map((p) => entities.add(toEntity(p))).toList();
-
-    return entities;
+  static List<ShopEntity> toEntities(List<FilialDto> models) {
+    return models.map((model) => toEntity(model)).toList();
   }
 }
