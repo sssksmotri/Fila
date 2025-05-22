@@ -15,13 +15,19 @@ class AppFirebase {
   factory AppFirebase() => _instance ?? AppFirebase._internal();
 
   Future init() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    try {
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+    } on FirebaseException catch (e) {
+      if (e.code == 'duplicate-app') {
+      } else {
+        rethrow;
+      }
+    }
+
     await AppCrashlytics().init();
-
     await AppAnalytics().init();
-
     await AppMessaging().init();
   }
 }

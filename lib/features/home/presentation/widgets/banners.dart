@@ -15,14 +15,14 @@ class Banners extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const double horizontalPadding = 16.0; // Отступы слева и справа
-    const double bannerSpacing = 8.0; // Отступ между баннерами
-    const double aspectRatio = 11 / 4; // Соотношение сторон баннеров (ширина / высота)
+    const double horizontalPadding = 8.0;
+    const double bannerSpacing = 8.0;
+    const double aspectRatio = 11 / 4;
 
     return LayoutBuilder(
       builder: (context, constraints) {
         final screenWidth = constraints.maxWidth;
-        final bannerWidth = screenWidth - 2 * horizontalPadding;
+        final bannerWidth = screenWidth - 4 * horizontalPadding;
         final bannerHeight = bannerWidth / aspectRatio;
 
         return SizedBox(
