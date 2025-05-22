@@ -13,7 +13,7 @@ class ModifiersMapper {
       type: model.type,
       minQuantity: model.minQuantity,
       maxQuantity: model.maxQuantity,
-      weight: model.weight,
+      weight: model.weight != null ? int.tryParse(model.weight!) : null,
     );
   }
 
@@ -37,7 +37,7 @@ class ModifiersMapper {
       type: model.type,
       minQuantity: model.minQuantity,
       maxQuantity: model.maxQuantity,
-      weight: model.weight,
+      weight: model.weight.toString(),
       isHalfPizza: model.isHalfPizza,
     );
   }

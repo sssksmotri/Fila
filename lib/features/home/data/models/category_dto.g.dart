@@ -7,7 +7,7 @@ part of 'category_dto.dart';
 // **************************************************************************
 
 CategoryDto _$CategoryDtoFromJson(Map<String, dynamic> json) => CategoryDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       isCollection: json['is_collection'] as bool,
       picture: json['picture'] as String?,

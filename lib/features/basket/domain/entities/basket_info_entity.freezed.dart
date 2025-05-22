@@ -12,7 +12,7 @@ part of 'basket_info_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BasketInfoEntity {
@@ -23,7 +23,9 @@ mixin _$BasketInfoEntity {
   BasketPretotalnfoEntity get bonusInfo => throw _privateConstructorUsedError;
   List<String> get warnings => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BasketInfoEntityCopyWith<BasketInfoEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -55,6 +57,8 @@ class _$BasketInfoEntityCopyWithImpl<$Res, $Val extends BasketInfoEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -88,6 +92,8 @@ class _$BasketInfoEntityCopyWithImpl<$Res, $Val extends BasketInfoEntity>
     ) as $Val);
   }
 
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BasketTotalInfoEntityCopyWith<$Res> get totalInfo {
@@ -96,6 +102,8 @@ class _$BasketInfoEntityCopyWithImpl<$Res, $Val extends BasketInfoEntity>
     });
   }
 
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $BasketPretotalnfoEntityCopyWith<$Res> get bonusInfo {
@@ -134,6 +142,8 @@ class __$$BasketInfoEntityImplCopyWithImpl<$Res>
       $Res Function(_$BasketInfoEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -215,7 +225,7 @@ class _$BasketInfoEntityImpl implements _BasketInfoEntity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BasketInfoEntityImpl &&
@@ -238,7 +248,9 @@ class _$BasketInfoEntityImpl implements _BasketInfoEntity {
       bonusInfo,
       const DeepCollectionEquality().hash(_warnings));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BasketInfoEntityImplCopyWith<_$BasketInfoEntityImpl> get copyWith =>
@@ -264,8 +276,11 @@ abstract class _BasketInfoEntity implements BasketInfoEntity {
   BasketPretotalnfoEntity get bonusInfo;
   @override
   List<String> get warnings;
+
+  /// Create a copy of BasketInfoEntity
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BasketInfoEntityImplCopyWith<_$BasketInfoEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

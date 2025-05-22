@@ -80,7 +80,7 @@ class _ShopsMapState extends State<ShopsMap> {
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: point,
-          zoom: 16,
+          zoom: 9,
         ),
       ),
       animation: animation,

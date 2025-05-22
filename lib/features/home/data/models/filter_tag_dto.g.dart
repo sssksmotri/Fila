@@ -7,7 +7,7 @@ part of 'filter_tag_dto.dart';
 // **************************************************************************
 
 FilterTagDto _$FilterTagDtoFromJson(Map<String, dynamic> json) => FilterTagDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
     );
 
 Map<String, dynamic> _$FilterTagDtoToJson(FilterTagDto instance) =>

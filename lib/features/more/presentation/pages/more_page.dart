@@ -119,14 +119,17 @@ class MorePage extends StatelessWidget {
                               if (settings.feedback?.vk != null) {
                                 actions.add(BottomSheetAction(
                                   title: Text(
-                                    'Написать в BK',
+                                    'Написать в BK',
                                     style: AppStyles.bodyRegular.copyWith(
                                       color: !Platform.isIOS ? AppColors.black : const Color(0xFF007AFF),
                                     ),
                                   ),
                                   onPressed: (context) async {
-                                    Uri link = Uri.parse(settings.feedback?.vk ?? '');
-
+                                    String urlString = settings.feedback?.vk ?? '';
+                                    if (Uri.tryParse(urlString)?.scheme.isEmpty ?? true) {
+                                      urlString = 'https://$urlString';
+                                    }
+                                    Uri link = Uri.parse(urlString);
                                     if (await canLaunchUrl(link)) {
                                       await launchUrl(link);
                                     }
@@ -137,14 +140,17 @@ class MorePage extends StatelessWidget {
                               if (settings.feedback?.wa != null) {
                                 actions.add(BottomSheetAction(
                                   title: Text(
-                                    'Написать в WhatsApp',
+                                    'Написать в WhatsApp',
                                     style: AppStyles.bodyRegular.copyWith(
                                       color: !Platform.isIOS ? AppColors.black : const Color(0xFF007AFF),
                                     ),
                                   ),
                                   onPressed: (context) async {
-                                    Uri link = Uri.parse(settings.feedback?.wa ?? '');
-
+                                    String urlString = settings.feedback?.wa ?? '';
+                                    if (Uri.tryParse(urlString)?.scheme.isEmpty ?? true) {
+                                      urlString = 'https://$urlString';
+                                    }
+                                    Uri link = Uri.parse(urlString);
                                     if (await canLaunchUrl(link)) {
                                       await launchUrl(link);
                                     }
@@ -161,8 +167,11 @@ class MorePage extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: (context) async {
-                                    Uri link = Uri.parse(settings.feedback?.tg ?? '');
-
+                                    String urlString = settings.feedback?.tg ?? '';
+                                    if (Uri.tryParse(urlString)?.scheme.isEmpty ?? true) {
+                                      urlString = 'https://$urlString';
+                                    }
+                                    Uri link = Uri.parse(urlString);
                                     if (await canLaunchUrl(link)) {
                                       await launchUrl(link);
                                     }
@@ -267,7 +276,12 @@ class MorePage extends StatelessWidget {
             onTap: () async {
               final settingsState = context.read<SettingsBloc>();
               if (settingsState.state is Success) {
-                final Uri url = Uri.parse((settingsState.state as Success).settings.monobox!.link!);
+                String linkString = (settingsState.state as Success).settings.monobox!.link!;
+                Uri url = Uri.parse(linkString);
+                if (url.scheme.isEmpty) {
+                  linkString = 'https://$linkString';
+                  url = Uri.parse(linkString);
+                }
                 if (await canLaunchUrl(url)) {
                   await launchUrl(url);
                 }

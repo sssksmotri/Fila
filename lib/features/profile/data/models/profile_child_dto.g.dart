@@ -8,7 +8,7 @@ part of 'profile_child_dto.dart';
 
 ProfileChildDto _$ProfileChildDtoFromJson(Map<String, dynamic> json) =>
     ProfileChildDto(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       birthdate: json['birthdate'] as String?,
     );

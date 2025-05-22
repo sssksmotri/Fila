@@ -2,16 +2,51 @@ import 'package:decimal/decimal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:monobox/features/home/domain/entities/modifier_entity.dart';
+import 'package:monobox/features/home/domain/entities/option_entity.dart';
 import '../../../domain/entities/modifier_item_entity.dart';
 import '../../../domain/entities/product_entity.dart';
+import '../../../../basket/presentation/bloc/basket/basket_bloc.dart';
 
 part 'product_card_state_state.dart';
 part 'product_card_state_cubit.freezed.dart';
 
 class ProductCardStateCubit extends Cubit<ProductCardStateState> {
-  ProductCardStateCubit(this.product) : super(ProductCardStateState(product: product));
+  ProductCardStateCubit(
+      this.product, {
+        Map<int, int>? initialQuantities,
+        this.basketBloc,
+      }) : super(ProductCardStateState(
+    product: product,
+    selectedQuantities: initialQuantities ?? {},
+  ));
 
   final ProductEntity product;
+  final BasketBloc? basketBloc;
+
+
+  void _updateBasket() {
+    if (basketBloc == null) return;
+    final offer = basketBloc!.getProductOffer(product);
+    if (offer != null) {
+      final updatedOffer = offer.copyWith(
+        addOptions: getSelectedOptions(),
+      );
+      print('Updating basket with offer: $updatedOffer');
+      basketBloc!.add(UpdateOffer(updatedOffer));
+    }
+  }
+
+  void setInitialModifierQuantities(List<ProductOptionEntity> addOptions) {
+    final newQuantities = <int, int>{};
+    for (var option in addOptions) {
+      if (option.id != null) {
+        newQuantities[option.id!] = option.quantity;
+      }
+    }
+    emit(state.copyWith(selectedQuantities: newQuantities));
+
+  }
+
 
   void incrementModifier(ModifierItemEntity item) {
     final current = state.selectedQuantities[item.id] ?? 0;
@@ -20,6 +55,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       final newQuantities = Map<int, int>.from(state.selectedQuantities);
       newQuantities[item.id] = current + 1;
       emit(state.copyWith(selectedQuantities: newQuantities));
+      /*_updateBasket();*/
     }
   }
 
@@ -34,6 +70,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
         newQuantities.remove(item.id);
       }
       emit(state.copyWith(selectedQuantities: newQuantities));
+     /* _updateBasket();*/
     }
   }
 
@@ -44,7 +81,15 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       final newQuantities = Map<int, int>.from(state.selectedQuantities);
       newQuantities[item.id] = current + 1;
       emit(state.copyWith(selectedQuantities: newQuantities));
+      /*_updateBasket();*/
     }
+  }
+
+  void setModifierQuantity(ModifierItemEntity item, int quantity) {
+    final newQuantities = Map<int, int>.from(state.selectedQuantities);
+    newQuantities[item.id] = quantity.clamp(0, item.maxQuantity ?? 10);
+    emit(state.copyWith(selectedQuantities: newQuantities));
+    print('Set modifier ${item.id} to quantity $quantity, new quantities: $newQuantities');
   }
 
   void addUniqModifier(ModifierItemEntity item, List<ModifierItemEntity> modifierItems) {
@@ -59,12 +104,14 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       newQuantities[item.id] = 1;
     }
     emit(state.copyWith(selectedQuantities: newQuantities));
+    /*_updateBasket();*/
   }
 
   void deleteModifier(ModifierItemEntity item) {
     final newQuantities = Map<int, int>.from(state.selectedQuantities);
     newQuantities.remove(item.id);
     emit(state.copyWith(selectedQuantities: newQuantities));
+    /*_updateBasket();*/
   }
 
   Decimal _getProductPrice() {
@@ -117,5 +164,23 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
         .items
         .where((item) => state.selectedQuantities.containsKey(item.id) && state.selectedQuantities[item.id]! > 0)
         .toList();
+  }
+
+
+  List<ProductOptionEntity> getSelectedOptions() {
+    final List<ProductOptionEntity> selectedOptions = [];
+    state.selectedQuantities.forEach((id, quantity) {
+      final item = product.modifiers
+          .expand((m) => m.items)
+          .firstWhere((i) => i.id == id);
+      selectedOptions.add(ProductOptionEntity(
+        id: item.id,
+        name: item.title,
+        price: item.price,
+        unit: item.weight,
+        quantity: quantity,
+      ));
+    });
+    return selectedOptions;
   }
 }

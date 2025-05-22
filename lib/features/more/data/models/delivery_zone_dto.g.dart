@@ -8,7 +8,7 @@ part of 'delivery_zone_dto.dart';
 
 DeliveryZoneDto _$DeliveryZoneDtoFromJson(Map<String, dynamic> json) =>
     DeliveryZoneDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       fill: json['fill'] as String,
       fillOpacity: json['fill_opacity'] as String,

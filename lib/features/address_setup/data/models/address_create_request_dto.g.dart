@@ -24,39 +24,30 @@ AddressCreateRequestDto _$AddressCreateRequestDtoFromJson(
       kladrId: json['kladr_id'] as String?,
       uid: json['uid'] as String?,
       domofon: json['domofon'] as String?,
-      cityId: json['city_id'] as int?,
+      cityId: (json['city_id'] as num?)?.toInt(),
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$AddressCreateRequestDtoToJson(
-    AddressCreateRequestDto instance) {
-  final val = <String, dynamic>{
-    'title': instance.title,
-    'street': instance.street,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('comment', instance.comment);
-  writeNotNull('zipcode', instance.zipcode);
-  writeNotNull('country', instance.country);
-  writeNotNull('region', instance.region);
-  writeNotNull('city', instance.city);
-  writeNotNull('house', instance.house);
-  writeNotNull('building', instance.building);
-  writeNotNull('entrance', instance.entrance);
-  writeNotNull('floor', instance.floor);
-  writeNotNull('appartment', instance.appartment);
-  writeNotNull('kladr_id', instance.kladrId);
-  writeNotNull('uid', instance.uid);
-  writeNotNull('domofon', instance.domofon);
-  writeNotNull('latitude', instance.latitude);
-  writeNotNull('longitude', instance.longitude);
-  writeNotNull('city_id', instance.cityId);
-  return val;
-}
+        AddressCreateRequestDto instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'street': instance.street,
+      if (instance.comment case final value?) 'comment': value,
+      if (instance.zipcode case final value?) 'zipcode': value,
+      if (instance.country case final value?) 'country': value,
+      if (instance.region case final value?) 'region': value,
+      if (instance.city case final value?) 'city': value,
+      if (instance.house case final value?) 'house': value,
+      if (instance.building case final value?) 'building': value,
+      if (instance.entrance case final value?) 'entrance': value,
+      if (instance.floor case final value?) 'floor': value,
+      if (instance.appartment case final value?) 'appartment': value,
+      if (instance.kladrId case final value?) 'kladr_id': value,
+      if (instance.uid case final value?) 'uid': value,
+      if (instance.domofon case final value?) 'domofon': value,
+      if (instance.latitude case final value?) 'latitude': value,
+      if (instance.longitude case final value?) 'longitude': value,
+      if (instance.cityId case final value?) 'city_id': value,
+    };

@@ -8,7 +8,7 @@ part of 'collection_dto.dart';
 
 CollectionDto _$CollectionDtoFromJson(Map<String, dynamic> json) =>
     CollectionDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['title'] as String,
       picture: json['picture'] as String,
       products: (json['products'] as List<dynamic>?)

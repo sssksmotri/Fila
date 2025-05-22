@@ -12,13 +12,16 @@ part of 'basket_modifire_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$BasketModifireEntity {
   int get id => throw _privateConstructorUsedError;
+  int get qnt => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BasketModifireEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BasketModifireEntityCopyWith<BasketModifireEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -29,7 +32,7 @@ abstract class $BasketModifireEntityCopyWith<$Res> {
           $Res Function(BasketModifireEntity) then) =
       _$BasketModifireEntityCopyWithImpl<$Res, BasketModifireEntity>;
   @useResult
-  $Res call({int id});
+  $Res call({int id, int qnt});
 }
 
 /// @nodoc
@@ -43,15 +46,22 @@ class _$BasketModifireEntityCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BasketModifireEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
+    Object? qnt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      qnt: null == qnt
+          ? _value.qnt
+          : qnt // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -65,7 +75,7 @@ abstract class _$$BasketModifireEntityImplCopyWith<$Res>
       __$$BasketModifireEntityImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id});
+  $Res call({int id, int qnt});
 }
 
 /// @nodoc
@@ -76,15 +86,22 @@ class __$$BasketModifireEntityImplCopyWithImpl<$Res>
       $Res Function(_$BasketModifireEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BasketModifireEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
+    Object? qnt = null,
   }) {
     return _then(_$BasketModifireEntityImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      qnt: null == qnt
+          ? _value.qnt
+          : qnt // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -93,28 +110,33 @@ class __$$BasketModifireEntityImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$BasketModifireEntityImpl implements _BasketModifireEntity {
-  const _$BasketModifireEntityImpl({required this.id});
+  const _$BasketModifireEntityImpl({required this.id, required this.qnt});
 
   @override
   final int id;
+  @override
+  final int qnt;
 
   @override
   String toString() {
-    return 'BasketModifireEntity(id: $id)';
+    return 'BasketModifireEntity(id: $id, qnt: $qnt)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BasketModifireEntityImpl &&
-            (identical(other.id, id) || other.id == id));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.qnt, qnt) || other.qnt == qnt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id);
+  int get hashCode => Object.hash(runtimeType, id, qnt);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BasketModifireEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BasketModifireEntityImplCopyWith<_$BasketModifireEntityImpl>
@@ -124,13 +146,19 @@ class _$BasketModifireEntityImpl implements _BasketModifireEntity {
 }
 
 abstract class _BasketModifireEntity implements BasketModifireEntity {
-  const factory _BasketModifireEntity({required final int id}) =
-      _$BasketModifireEntityImpl;
+  const factory _BasketModifireEntity(
+      {required final int id,
+      required final int qnt}) = _$BasketModifireEntityImpl;
 
   @override
   int get id;
   @override
-  @JsonKey(ignore: true)
+  int get qnt;
+
+  /// Create a copy of BasketModifireEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BasketModifireEntityImplCopyWith<_$BasketModifireEntityImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

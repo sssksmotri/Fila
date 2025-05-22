@@ -25,6 +25,12 @@ class BasketOfferEntity extends Equatable {
     return val;
   }
 
+  Map<String, dynamic> toJson() => {
+    'id': product.id,
+    'qnt': quantity,
+    'modifiers': addOptions?.map((option) => option.toJson()).toList() ?? [],
+  };
+
   BasketOfferEntity copyWith({
     String? id,
     ProductEntity? product,
@@ -43,10 +49,10 @@ class BasketOfferEntity extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        product,
-        quantity,
-        addOptions,
-        removeOptions,
-      ];
+    id,
+    product,
+    quantity,
+    addOptions,
+    removeOptions,
+  ];
 }

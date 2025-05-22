@@ -8,6 +8,7 @@ class ProductOptionEntity extends Equatable {
   final String? image;
   final Decimal? price;
   final String? unit;
+  final int quantity;
 
   const ProductOptionEntity({
     this.id,
@@ -16,6 +17,7 @@ class ProductOptionEntity extends Equatable {
     this.image,
     required this.price,
     this.unit,
+    this.quantity = 1,
   });
 
   ProductOptionEntity copyWith({
@@ -25,6 +27,7 @@ class ProductOptionEntity extends Equatable {
     String? image,
     Decimal? price,
     String? unit,
+    int? quantity,
   }) {
     return ProductOptionEntity(
       id: id ?? this.id,
@@ -33,16 +36,23 @@ class ProductOptionEntity extends Equatable {
       image: image ?? this.image,
       price: price ?? this.price,
       unit: unit ?? this.unit,
+      quantity: quantity ?? this.quantity,
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'qnt': quantity,
+  };
+
   @override
   List<Object?> get props => [
-        id,
-        name,
-        description,
-        image,
-        price,
-        unit,
-      ];
+    id,
+    name,
+    description,
+    image,
+    price,
+    unit,
+    quantity,
+  ];
 }

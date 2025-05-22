@@ -9,13 +9,16 @@ part 'basket_modifire_dto.g.dart';
 class BasketModifireDto {
   BasketModifireDto({
     required this.id,
+    required this.qnt,
   });
 
   final int id;
+  final int qnt;
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'qnt': qnt,
+  };
 
   factory BasketModifireDto.fromJson(Map<String, dynamic> json) => _$BasketModifireDtoFromJson(json);
-
-  Map<String, dynamic> toJson() {
-    return _$BasketModifireDtoToJson(this);
-  }
 }

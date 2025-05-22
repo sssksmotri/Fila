@@ -8,6 +8,6 @@ part of 'basket_total_info_dto.dart';
 
 BasketTotalInfoDto _$BasketTotalInfoDtoFromJson(Map<String, dynamic> json) =>
     BasketTotalInfoDto(
-      total: json['total'] as int,
-      discountPrice: json['discount_price'] as int,
+      total: (json['total'] as num).toInt(),
+      discountPrice: (json['discount_price'] as num).toInt(),
     );

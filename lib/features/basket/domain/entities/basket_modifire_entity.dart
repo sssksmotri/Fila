@@ -6,5 +6,6 @@ part 'basket_modifire_entity.freezed.dart';
 class BasketModifireEntity with _$BasketModifireEntity {
   const factory BasketModifireEntity({
     required int id,
+    required int qnt,
   }) = _BasketModifireEntity;
 }

@@ -27,13 +27,16 @@ class ProductModifier extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: modifiers.map((modifier) {
             final selected = cubit.selectedModifiersByParent(modifier);
-
+            final totalSelectedQuantity = modifier.items
+                .fold<int>(
+              0,
+                  (sum, item) => sum + (state.selectedQuantities[item.id] ?? 0),
+            );
             if (modifier.type == 'switcher') {
 
               if (selected.isEmpty && modifier.items.isNotEmpty) {
                 cubit.addModifier(modifier.items[0]);
               }
-
 
               int selectedIndex = 0;
               for (int i = 0; i < modifier.items.length; i++) {
@@ -71,7 +74,7 @@ class ProductModifier extends StatelessWidget {
                         Text(modifier.title, style: AppStyles.title3),
                         if (modifier.maxQuantity != null)
                           Text(
-                            '${selected.length} из ${modifier.maxQuantity}',
+                            '$totalSelectedQuantity из ${modifier.maxQuantity}',
                             style: AppStyles.caption1.copyWith(color: AppColors.gray),
                           ),
                       ],
@@ -93,8 +96,9 @@ class ProductModifier extends StatelessWidget {
                             final maxQty = item.maxQuantity ?? 1;
                             final isSelected = quantity > 0;
                             final disabled = modifier.maxQuantity != null &&
-                                !isSelected &&
-                                selected.length >= modifier.maxQuantity!;
+                                totalSelectedQuantity >= modifier.maxQuantity! &&
+                                quantity == 0 &&
+                                selected.every((sel) => (state.selectedQuantities[sel.id] ?? 0) <= (sel.minQuantity ?? 0));
 
                             return Padding(
                               padding: const EdgeInsets.only(right: 12),
@@ -223,8 +227,11 @@ class ProductModifier extends StatelessWidget {
                                             ),
                                             Expanded(
                                               child: GestureDetector(
-                                                onTap: quantity < maxQty
-                                                    ? () => cubit.incrementModifier(item)
+                                                onTap: quantity < maxQty &&
+                                                    (modifier.maxQuantity == null || totalSelectedQuantity < modifier.maxQuantity!)
+                                                    ? () {
+                                                  cubit.incrementModifier(item);
+                                                }
                                                     : null,
                                                 child: Container(
                                                   color: Colors.transparent,
@@ -255,8 +262,10 @@ class ProductModifier extends StatelessWidget {
                           final quantity = state.selectedQuantities[item.id] ?? 0;
                           final isSelected = quantity > 0;
                           final disabled = modifier.maxQuantity != null &&
+                              totalSelectedQuantity >= modifier.maxQuantity! &&
                               !isSelected &&
-                              selected.length >= modifier.maxQuantity!;
+                              selected.every((sel) =>
+                              (state.selectedQuantities[sel.id] ?? 0) <= (sel.minQuantity ?? 0));
 
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

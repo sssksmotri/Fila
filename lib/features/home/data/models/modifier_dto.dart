@@ -26,7 +26,7 @@ class ModifierDto {
   final List<ModifierItemDto> items;
   final int? minQuantity;
   final int? maxQuantity;
-  final String? weight;
+  final int? weight;
   final bool isHalfPizza;
 
   factory ModifierDto.fromJson(Map<String, dynamic> json) => _$ModifierDtoFromJson(json);

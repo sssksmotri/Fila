@@ -61,29 +61,20 @@ class ProductOptionDtoAdapter extends TypeAdapter<ProductOptionDto> {
 
 ProductOptionDto _$ProductOptionDtoFromJson(Map<String, dynamic> json) =>
     ProductOptionDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['title'] as String,
       picture: json['image'] as String?,
       description: json['description'] as String?,
-      price: json['price'] as int?,
+      price: (json['price'] as num?)?.toInt(),
       unit: json['unit'] as String?,
     );
 
-Map<String, dynamic> _$ProductOptionDtoToJson(ProductOptionDto instance) {
-  final val = <String, dynamic>{
-    'id': instance.id,
-    'title': instance.name,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('image', instance.picture);
-  writeNotNull('description', instance.description);
-  writeNotNull('price', instance.price);
-  writeNotNull('unit', instance.unit);
-  return val;
-}
+Map<String, dynamic> _$ProductOptionDtoToJson(ProductOptionDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.name,
+      if (instance.picture case final value?) 'image': value,
+      if (instance.description case final value?) 'description': value,
+      if (instance.price case final value?) 'price': value,
+      if (instance.unit case final value?) 'unit': value,
+    };

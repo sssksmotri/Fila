@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -45,8 +46,16 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     final BasketBloc basketBloc = context.watch<BasketBloc>();
     final BasketOfferEntity? offer = basketBloc.getProductOffer(widget.product);
-    final bloc = widget.productCardState ?? ProductCardStateCubit(widget.product);
-
+    final bloc = widget.productCardState ?? ProductCardStateCubit(
+      widget.product,
+      initialQuantities: offer != null && offer.addOptions != null
+          ? {
+        for (var option in offer.addOptions!)
+          if (option.id != null) option.id!: option.quantity
+      }
+          : {},
+      basketBloc: basketBloc,
+    );
     return BlocProvider.value(
       value: bloc,
       child: Scaffold(
@@ -273,11 +282,16 @@ class _ProductPageState extends State<ProductPage> {
                               children: [
                                 BlocBuilder<ProductCardStateCubit, ProductCardStateState>(
                                   builder: (context, state) {
+                                    final basketBloc = context.watch<BasketBloc>();
+                                    final offer = basketBloc.getProductOffer(widget.product);
+                                    final totalPrice = offer != null && offer.quantity != null
+                                        ? context.read<ProductCardStateCubit>().productTotalPrice * Decimal.fromInt(offer.quantity!)
+                                        : context.read<ProductCardStateCubit>().productTotalPrice;
+
+                                    print('Price BlocBuilder rebuilt with totalPrice: $totalPrice, quantity: ${offer?.quantity ?? 1}');
                                     return Text(
-                                      '${context.read<ProductCardStateCubit>().productTotalPrice} ₽',
-                                      style: AppStyles.bodyBold.copyWith(
-                                        color: AppColors.black,
-                                      ),
+                                      '$totalPrice ₽',
+                                      style: AppStyles.bodyBold.copyWith(color: AppColors.black),
                                     );
                                   },
                                 ),
@@ -303,22 +317,7 @@ class _ProductPageState extends State<ProductPage> {
                                               id: const Uuid().v4(),
                                               product: widget.product,
                                               quantity: 1,
-                                              addOptions: bloc.state.selectedQuantities.entries
-                                                  .where((entry) => entry.value > 0)
-                                                  .expand((entry) {
-                                                final modifier = widget.product.modifiers
-                                                    .expand((m) => m.items)
-                                                    .firstWhere((item) => item.id == entry.key);
-                                                return List.filled(
-                                                  entry.value,
-                                                  ProductOptionEntity(
-                                                    id: modifier.id,
-                                                    name: modifier.title,
-                                                    price: modifier.price,
-                                                  ),
-                                                );
-                                              })
-                                                  .toList(),
+                                            addOptions: bloc.getSelectedOptions()
                                         ),)
                                       );
                                       //await AutoRouter.of(context).pop();

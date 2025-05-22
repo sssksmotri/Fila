@@ -7,7 +7,7 @@ part of 'action_dto.dart';
 // **************************************************************************
 
 ActionDto _$ActionDtoFromJson(Map<String, dynamic> json) => ActionDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
       content: json['content'] as String?,
       description: json['description'] as String?,

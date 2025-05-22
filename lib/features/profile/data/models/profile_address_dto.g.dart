@@ -8,7 +8,7 @@ part of 'profile_address_dto.dart';
 
 ProfileAddressDto _$ProfileAddressDtoFromJson(Map<String, dynamic> json) =>
     ProfileAddressDto(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       title: json['title'] as String?,
       latitude: json['latitude'] as String?,
       longitude: json['longitude'] as String?,

@@ -7,7 +7,7 @@ part of 'delivery_dto.dart';
 // **************************************************************************
 
 DeliveryDto _$DeliveryDtoFromJson(Map<String, dynamic> json) => DeliveryDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['title'] as String,
       type: json['type'] as String?,
     );

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:monobox/features/basket/domain/entities/basket_info_request_entity.dart';
 import 'package:monobox/features/home/data/repository/mappers/products_mapper.dart';
@@ -67,19 +69,18 @@ class BasketRepositoryImpl implements BasketRepository {
   Future<DataState<BasketInfoEntity>> getBasketInfo(List<BasketInfoRequestEntity> request, int deliveryId) async {
     try {
       var requestDto = BasketInfoRequestBasketDto(
-        basket: request
-            .map(
-              (r) => BasketInfoRequestDto(
-                id: r.id,
-                qnt: r.qnt,
-                modifiers: r.modifiers.map((m) => BasketModifireDto(id: m.id)).toList(),
-              ),
-            )
-            .toList(),
+        basket: request.map((r) => BasketInfoRequestDto(
+          id: r.id,
+          qnt: r.qnt,
+          modifiers: r.modifiers.map((m) => BasketModifireDto(
+            id: m.id ?? 0,
+            qnt: m.qnt ?? 0,
+          )).toList() ?? [],
+        )).toList(),
         deliveryId: deliveryId,
       );
       BasketInfoDto basketInfo = await _service.basketInfo(requestDto);
-
+      print(jsonEncode(requestDto.toJson()));
       return DataSuccess(
         BasketInfoEntity(
           products: ProductsMapper.toProductsEntity(basketInfo.products),
@@ -89,22 +90,37 @@ class BasketRepositoryImpl implements BasketRepository {
           ),
           pretotalInfo: basketInfo.pretotalInfo
               .map((pretotalInfo) => BasketPretotalnfoEntity(
-                    title: pretotalInfo.title??"",
-                    value: pretotalInfo.value??"",
-                  ))
+            title: pretotalInfo.title ?? "",
+            value: pretotalInfo.value ?? "",
+          ))
               .toList(),
           bonusInfo: BasketPretotalnfoEntity(
-            title: basketInfo.bonusInfo.title??"",
-            value: basketInfo.bonusInfo.value??"",
+            title: basketInfo.bonusInfo.title ?? "",
+            value: basketInfo.bonusInfo.value ?? "",
           ),
           warnings: basketInfo.warnings,
         ),
       );
     } on DioException catch (e) {
+      print('DioException in getBasketInfo: ${e.message}');
+      print('Response status: ${e.response?.statusCode}');
+      final responseData = e.response?.data.toString();
+      if (responseData != null) {
+        const maxLogLength = 1000;
+        print('Response data: ${responseData.length > maxLogLength ? responseData.substring(0, maxLogLength) + '...' : responseData}');
+      }
+
+      String errorMessage = 'Не удалось получить информацию о корзине.';
+      if (e.response?.statusCode == 500) {
+        errorMessage = 'Ошибка сервера: неверный формат запроса. Пожалуйста, попробуйте снова.';
+      }
+
       return DataFailed(
         DioException(
           requestOptions: e.requestOptions,
-          message: e.message,
+          message: errorMessage,
+          response: e.response,
+          error: e.error,
         ),
       );
     }

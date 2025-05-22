@@ -11,17 +11,8 @@ PromocodeDto _$PromocodeDtoFromJson(Map<String, dynamic> json) => PromocodeDto(
       message: json['message'] as String?,
     );
 
-Map<String, dynamic> _$PromocodeDtoToJson(PromocodeDto instance) {
-  final val = <String, dynamic>{
-    'code': instance.code,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('message', instance.message);
-  return val;
-}
+Map<String, dynamic> _$PromocodeDtoToJson(PromocodeDto instance) =>
+    <String, dynamic>{
+      'code': instance.code,
+      if (instance.message case final value?) 'message': value,
+    };

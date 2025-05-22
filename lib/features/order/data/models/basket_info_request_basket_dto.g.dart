@@ -12,7 +12,7 @@ BasketInfoRequestBasketDto _$BasketInfoRequestBasketDtoFromJson(
       basket: (json['basket'] as List<dynamic>)
           .map((e) => BasketInfoRequestDto.fromJson(e as Map<String, dynamic>))
           .toList(),
-      deliveryId: json['delivery_id'] as int,
+      deliveryId: (json['delivery_id'] as num).toInt(),
     );
 
 Map<String, dynamic> _$BasketInfoRequestBasketDtoToJson(

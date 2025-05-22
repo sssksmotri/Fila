@@ -201,14 +201,15 @@ class _ChooseAddressState extends State<ChooseAddress> {
                         }
                       }
                     },
-                    suggestionsCallback: (String search) async {
-                      if (search.length < 2) {
+                    suggestionsCallback: (String street) async {
+                      if (street.length < 2) return [];
+                      final city = context.read<ShopLocationStateCubit>().state.city?.name ?? '';
+                      if (city.isEmpty) {
+
                         return [];
                       }
-                      final String city = getIt<AddressSetupStateCubit>().state.address?.city?.name ?? '';
-
-                      getIt<GeoSuggestionCubit>().search(city, search);
-                      return getIt<GeoSuggestionCubit>().state.suggestions;
+                      context.read<GeoSuggestionCubit>().search(city, street);
+                      return context.read<GeoSuggestionCubit>().state.suggestions;
                     },
                     builder: (context, controller, focusNode) {
                       return BlocBuilder<AddressSetupStateCubit, AddressSetupState>(

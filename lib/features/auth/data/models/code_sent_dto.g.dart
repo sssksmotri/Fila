@@ -8,5 +8,5 @@ part of 'code_sent_dto.dart';
 
 CodeSentDto _$CodeSentDtoFromJson(Map<String, dynamic> json) => CodeSentDto(
       message: json['message'] as String,
-      expired: json['expired'] as int?,
+      expired: (json['expired'] as num?)?.toInt(),
     );

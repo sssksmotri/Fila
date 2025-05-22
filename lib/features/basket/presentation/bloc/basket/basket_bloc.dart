@@ -50,6 +50,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
     on<AddQtyOffer>(_onAddQtyOffer);
     on<SetPromo>(_onSetPromo);
     on<SetMoneyChange>(_onSetMoneyChange);
+    on<UpdateOffer>(_onUpdateOffer);
     // on<ConfirmOrder>(_onConfirmOrder);
   }
 
@@ -330,6 +331,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
         offer = element;
       }
     }
+    print('Updating basket with offer: $offer');
     return offer;
   }
 
@@ -424,6 +426,27 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
           ),
         ),
       );
+    }
+  }
+
+
+  void _onUpdateOffer(UpdateOffer event, Emitter<BasketState> emit) {
+    if (state is BasketLoaded) {
+      try {
+        final BasketEntity basket = (state as BasketLoaded).basket;
+        final offers = List<BasketOfferEntity>.from(basket.offers);
+
+        for (int i = 0; i < offers.length; i++) {
+          if (offers[i].id == event.offer.id) {
+            offers[i] = event.offer;
+            break;
+          }
+        }
+
+        emit(BasketLoaded(basket: basket.copyWith(offers: offers)));
+      } catch (message) {
+        emit(BasketFailure(message: message.toString()));
+      }
     }
   }
 }

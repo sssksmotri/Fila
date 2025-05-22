@@ -9,7 +9,7 @@ part of 'filials_search_request_dto.dart';
 FilialsSearchRequestDto _$FilialsSearchRequestDtoFromJson(
         Map<String, dynamic> json) =>
     FilialsSearchRequestDto(
-      cityId: json['city_id'] as int?,
+      cityId: (json['city_id'] as num?)?.toInt(),
       address: json['address'] as String?,
       coordinates: json['coords'] == null
           ? null
@@ -17,17 +17,9 @@ FilialsSearchRequestDto _$FilialsSearchRequestDtoFromJson(
     );
 
 Map<String, dynamic> _$FilialsSearchRequestDtoToJson(
-    FilialsSearchRequestDto instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('city_id', instance.cityId);
-  writeNotNull('address', instance.address);
-  writeNotNull('coords', instance.coordinates);
-  return val;
-}
+        FilialsSearchRequestDto instance) =>
+    <String, dynamic>{
+      if (instance.cityId case final value?) 'city_id': value,
+      if (instance.address case final value?) 'address': value,
+      if (instance.coordinates case final value?) 'coords': value,
+    };

@@ -8,7 +8,7 @@ part of 'payment_method_dto.dart';
 
 PaymentMethodDto _$PaymentMethodDtoFromJson(Map<String, dynamic> json) =>
     PaymentMethodDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['title'] as String,
       code: json['code'] as String?,
     );

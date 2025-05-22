@@ -216,7 +216,14 @@ class MainWidget extends StatelessWidget {
                         (offer) => BasketInfoRequestEntity(
                           id: offer.product.id ?? 0,
                           qnt: offer.quantity ?? 1,
-                          modifiers: offer.addOptions != null ? offer.addOptions!.map((modifier) => BasketModifireEntity(id: modifier.id!)).toList() : [],
+                            modifiers: offer.addOptions != null
+                                ? offer.addOptions!
+                                .where((modifier) => modifier.id != null)
+                                .map((modifier) => BasketModifireEntity(
+                              id: modifier.id!,
+                              qnt: modifier.quantity,
+                            )).toList()
+                                : [],
                         ),
                       )
                     ],

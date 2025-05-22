@@ -22,9 +22,13 @@ class SocialNetworks extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                      final Uri url = Uri.parse(success.socnet!.vk!);
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
+                      String urlString = success.socnet!.vk! ?? '';
+                      if (Uri.tryParse(urlString)?.scheme.isEmpty ?? true) {
+                        urlString = 'https://$urlString';
+                      }
+                      Uri link = Uri.parse(urlString);
+                      if (await canLaunchUrl(link)) {
+                        await launchUrl(link);
                       }
                     },
                     child: const SocialNetworksItem(
@@ -40,9 +44,13 @@ class SocialNetworks extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                      final Uri url = Uri.parse(success.socnet!.tg!);
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
+                      String urlString = success.socnet!.tg! ?? '';
+                      if (Uri.tryParse(urlString)?.scheme.isEmpty ?? true) {
+                        urlString = 'https://$urlString';
+                      }
+                      Uri link = Uri.parse(urlString);
+                      if (await canLaunchUrl(link)) {
+                        await launchUrl(link);
                       }
                     },
                     child: const SocialNetworksItem(
@@ -58,9 +66,13 @@ class SocialNetworks extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () async {
-                      final Uri url = Uri.parse(success.socnet!.insta!);
-                      if (await canLaunchUrl(url)) {
-                        await launchUrl(url);
+                      String urlString = success.socnet!.insta! ?? '';
+                      if (Uri.tryParse(urlString)?.scheme.isEmpty ?? true) {
+                        urlString = 'https://$urlString';
+                      }
+                      Uri link = Uri.parse(urlString);
+                      if (await canLaunchUrl(link)) {
+                        await launchUrl(link);
                       }
                     },
                     child: const SocialNetworksItem(

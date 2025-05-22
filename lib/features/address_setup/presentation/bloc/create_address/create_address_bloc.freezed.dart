@@ -12,7 +12,7 @@ part of 'create_address_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$CreateAddressEvent {
@@ -78,6 +78,9 @@ class _$CreateAddressEventCopyWithImpl<$Res, $Val extends CreateAddressEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -97,6 +100,8 @@ class __$$AddAddressImplCopyWithImpl<$Res>
       _$AddAddressImpl _value, $Res Function(_$AddAddressImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -125,7 +130,7 @@ class _$AddAddressImpl implements _AddAddress {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddAddressImpl &&
@@ -135,7 +140,9 @@ class _$AddAddressImpl implements _AddAddress {
   @override
   int get hashCode => Object.hash(runtimeType, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddAddressImplCopyWith<_$AddAddressImpl> get copyWith =>
@@ -215,7 +222,10 @@ abstract class _AddAddress implements CreateAddressEvent {
       _$AddAddressImpl;
 
   AddressCreateEntity get address;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddAddressImplCopyWith<_$AddAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -237,6 +247,8 @@ class __$$DeleteAddressImplCopyWithImpl<$Res>
       _$DeleteAddressImpl _value, $Res Function(_$DeleteAddressImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -265,7 +277,7 @@ class _$DeleteAddressImpl implements _DeleteAddress {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DeleteAddressImpl &&
@@ -276,7 +288,9 @@ class _$DeleteAddressImpl implements _DeleteAddress {
   @override
   int get hashCode => Object.hash(runtimeType, addressId);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DeleteAddressImplCopyWith<_$DeleteAddressImpl> get copyWith =>
@@ -355,7 +369,10 @@ abstract class _DeleteAddress implements CreateAddressEvent {
   const factory _DeleteAddress(final int addressId) = _$DeleteAddressImpl;
 
   int get addressId;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DeleteAddressImplCopyWith<_$DeleteAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -379,6 +396,8 @@ class __$$EditAddressImplCopyWithImpl<$Res>
       _$EditAddressImpl _value, $Res Function(_$EditAddressImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -392,6 +411,8 @@ class __$$EditAddressImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressEntityCopyWith<$Res> get address {
@@ -415,7 +436,7 @@ class _$EditAddressImpl implements _EditAddress {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditAddressImpl &&
@@ -425,7 +446,9 @@ class _$EditAddressImpl implements _EditAddress {
   @override
   int get hashCode => Object.hash(runtimeType, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EditAddressImplCopyWith<_$EditAddressImpl> get copyWith =>
@@ -504,7 +527,10 @@ abstract class _EditAddress implements CreateAddressEvent {
   const factory _EditAddress(final AddressEntity address) = _$EditAddressImpl;
 
   AddressEntity get address;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateAddressEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditAddressImplCopyWith<_$EditAddressImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -585,6 +611,9 @@ class _$CreateAddressStateCopyWithImpl<$Res, $Val extends CreateAddressState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -601,6 +630,9 @@ class __$$InitialImplCopyWithImpl<$Res>
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -614,7 +646,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
@@ -721,6 +753,9 @@ class __$$SavingImplCopyWithImpl<$Res>
   __$$SavingImplCopyWithImpl(
       _$SavingImpl _value, $Res Function(_$SavingImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -734,7 +769,7 @@ class _$SavingImpl implements _Saving {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$SavingImpl);
   }
@@ -846,6 +881,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
       _$SuccessImpl _value, $Res Function(_$SuccessImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -859,6 +896,8 @@ class __$$SuccessImplCopyWithImpl<$Res>
     ));
   }
 
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressEntityCopyWith<$Res> get address {
@@ -882,7 +921,7 @@ class _$SuccessImpl implements _Success {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SuccessImpl &&
@@ -892,7 +931,9 @@ class _$SuccessImpl implements _Success {
   @override
   int get hashCode => Object.hash(runtimeType, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
@@ -983,7 +1024,10 @@ abstract class _Success implements CreateAddressState {
   const factory _Success(final AddressEntity address) = _$SuccessImpl;
 
   AddressEntity get address;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -1002,6 +1046,9 @@ class __$$DeletedImplCopyWithImpl<$Res>
   __$$DeletedImplCopyWithImpl(
       _$DeletedImpl _value, $Res Function(_$DeletedImpl) _then)
       : super(_value, _then);
+
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
 }
 
 /// @nodoc
@@ -1015,7 +1062,7 @@ class _$DeletedImpl implements _Deleted {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$DeletedImpl);
   }
@@ -1125,6 +1172,8 @@ class __$$ErrorStateImplCopyWithImpl<$Res>
       _$ErrorStateImpl _value, $Res Function(_$ErrorStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1153,7 +1202,7 @@ class _$ErrorStateImpl implements _ErrorState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorStateImpl &&
@@ -1163,7 +1212,9 @@ class _$ErrorStateImpl implements _ErrorState {
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
@@ -1254,7 +1305,10 @@ abstract class _ErrorState implements CreateAddressState {
   const factory _ErrorState(final String message) = _$ErrorStateImpl;
 
   String get message;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CreateAddressState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,13 +12,15 @@ part of 'applied_filter_state_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AppliedFilterStateState {
   List<TagEntity> get selectedTags => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppliedFilterStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppliedFilterStateStateCopyWith<AppliedFilterStateState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,6 +45,8 @@ class _$AppliedFilterStateStateCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppliedFilterStateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,6 +83,8 @@ class __$$AppliedFilterStateStateImplCopyWithImpl<$Res>
       $Res Function(_$AppliedFilterStateStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppliedFilterStateState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -115,7 +121,7 @@ class _$AppliedFilterStateStateImpl implements _AppliedFilterStateState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppliedFilterStateStateImpl &&
@@ -127,7 +133,9 @@ class _$AppliedFilterStateStateImpl implements _AppliedFilterStateState {
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_selectedTags));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppliedFilterStateState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppliedFilterStateStateImplCopyWith<_$AppliedFilterStateStateImpl>
@@ -141,8 +149,11 @@ abstract class _AppliedFilterStateState implements AppliedFilterStateState {
 
   @override
   List<TagEntity> get selectedTags;
+
+  /// Create a copy of AppliedFilterStateState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppliedFilterStateStateImplCopyWith<_$AppliedFilterStateStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

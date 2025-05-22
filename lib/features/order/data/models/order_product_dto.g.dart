@@ -8,8 +8,8 @@ part of 'order_product_dto.dart';
 
 OrderProductDto _$OrderProductDtoFromJson(Map<String, dynamic> json) =>
     OrderProductDto(
-      id: json['id'] as int,
-      qnt: json['qnt'] as int,
+      id: (json['id'] as num).toInt(),
+      qnt: (json['qnt'] as num).toInt(),
       title: json['title'] as String,
       image: json['image'] as String?,
       price: (json['price'] as num).toDouble(),

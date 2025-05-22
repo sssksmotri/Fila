@@ -9,7 +9,7 @@ part of 'order_details_address_dto.dart';
 OrderDetailsAddressDto _$OrderDetailsAddressDtoFromJson(
         Map<String, dynamic> json) =>
     OrderDetailsAddressDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String?,
       zipcode: json['zipcode'] as String?,
       country: json['country'] as String?,

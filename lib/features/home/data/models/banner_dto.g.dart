@@ -7,7 +7,7 @@ part of 'banner_dto.dart';
 // **************************************************************************
 
 BannerDto _$BannerDtoFromJson(Map<String, dynamic> json) => BannerDto(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       picture: json['image'] as String,
       title: json['title'] as String,
       url: json['link'] as String?,

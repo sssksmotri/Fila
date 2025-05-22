@@ -12,7 +12,7 @@ part of 'address_entity.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$AddressEntity {
@@ -34,7 +34,9 @@ mixin _$AddressEntity {
   String? get street => throw _privateConstructorUsedError;
   bool get isDefault => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddressEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AddressEntityCopyWith<AddressEntity> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -75,6 +77,8 @@ class _$AddressEntityCopyWithImpl<$Res, $Val extends AddressEntity>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AddressEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -205,6 +209,8 @@ class __$$AddressEntityImplCopyWithImpl<$Res>
       _$AddressEntityImpl _value, $Res Function(_$AddressEntityImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AddressEntity
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -364,7 +370,7 @@ class _$AddressEntityImpl extends _AddressEntity {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AddressEntityImpl &&
@@ -412,7 +418,9 @@ class _$AddressEntityImpl extends _AddressEntity {
       street,
       isDefault);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AddressEntity
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AddressEntityImplCopyWith<_$AddressEntityImpl> get copyWith =>
@@ -474,8 +482,11 @@ abstract class _AddressEntity extends AddressEntity {
   String? get street;
   @override
   bool get isDefault;
+
+  /// Create a copy of AddressEntity
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AddressEntityImplCopyWith<_$AddressEntityImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

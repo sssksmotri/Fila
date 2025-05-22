@@ -12,13 +12,15 @@ part of 'edit_address_cubit.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$EditAddressState {
   AddressEntity get address => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EditAddressState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $EditAddressStateCopyWith<EditAddressState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -44,6 +46,8 @@ class _$EditAddressStateCopyWithImpl<$Res, $Val extends EditAddressState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of EditAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -57,6 +61,8 @@ class _$EditAddressStateCopyWithImpl<$Res, $Val extends EditAddressState>
     ) as $Val);
   }
 
+  /// Create a copy of EditAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $AddressEntityCopyWith<$Res> get address {
@@ -88,6 +94,8 @@ class __$$EditAddressStateImplCopyWithImpl<$Res>
       $Res Function(_$EditAddressStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of EditAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -116,7 +124,7 @@ class _$EditAddressStateImpl implements _EditAddressState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$EditAddressStateImpl &&
@@ -126,7 +134,9 @@ class _$EditAddressStateImpl implements _EditAddressState {
   @override
   int get hashCode => Object.hash(runtimeType, address);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of EditAddressState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$EditAddressStateImplCopyWith<_$EditAddressStateImpl> get copyWith =>
@@ -140,8 +150,11 @@ abstract class _EditAddressState implements EditAddressState {
 
   @override
   AddressEntity get address;
+
+  /// Create a copy of EditAddressState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$EditAddressStateImplCopyWith<_$EditAddressStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
