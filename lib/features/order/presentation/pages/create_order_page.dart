@@ -1,3 +1,4 @@
+
 import 'dart:io';
 
 import 'package:auto_route/auto_route.dart';
@@ -25,6 +26,7 @@ import '../../../address_setup/presentation/bloc/create_address/create_address_b
 import '../../../address_setup/presentation/bloc/user_address/user_address_bloc.dart';
 import '../../../basket/domain/entities/basket_entity.dart';
 import '../../../basket/presentation/bloc/basket/basket_bloc.dart';
+import '../../../basket/presentation/bloc/basket_info/basket_info_bloc.dart';
 import '../bloc/create_order_state_cubit/create_order_state_cubit.dart';
 import '../bloc/deliveries/deliveries_bloc.dart';
 import '../bloc/order/order_bloc.dart';
@@ -497,11 +499,23 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '${basketBloc.subtotal} ₽',
-                          style: AppStyles.bodyBold.copyWith(
-                            color: AppColors.black,
-                          ),
+                        BlocBuilder<BasketInfoBloc, BasketInfoState>(
+                          builder: (context, state) {
+                            return state.maybeWhen(
+                              success: (basketInfo) => Text(
+                                '${basketInfo.totalInfo.total} ₽',
+                                style: AppStyles.bodyBold.copyWith(
+                                  color: AppColors.black,
+                                ),
+                              ),
+                              orElse: () => Text(
+                                '${basketBloc.subtotal} ₽', // Fallback to subtotal if BasketInfoBloc is not in success state
+                                style: AppStyles.bodyBold.copyWith(
+                                  color: AppColors.black,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                         const SizedBox(
                           height: 4,
@@ -535,11 +549,14 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                             .offers
                                             .map(
                                               (o) => orderedPositions.add(
-                                                OrderedPositionEntity(productId: o.product.id!, quantity: o.quantity ?? 1),
+                                                  OrderedPositionEntity(
+                                                    productId: o.product.id!,
+                                                    quantity: o.quantity ?? 1,
+                                                    modifiers: o.addOptions ?? [],
+                                                  )
                                               ),
                                             )
                                             .toList();
-
                                         int? addressId = context.read<CreateOrderStateCubit>().state.delivery?.type == 'delivery'
                                             ? context.read<CreateOrderStateCubit>().state.deliveryAddress?.id
                                             : context.read<CreateOrderStateCubit>().state.deliveryShop?.id;

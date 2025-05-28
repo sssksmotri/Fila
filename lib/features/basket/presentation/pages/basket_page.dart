@@ -261,7 +261,8 @@ class _BasketPageState extends State<BasketPage> {
                           .map((offer) => OrderedPositionEntity(
                                 productId: offer.product.id!,
                                 quantity: offer.quantity!,
-                              ))
+                              modifiers: offer.addOptions,
+                      ))
                           .toList(),
                     ),
                   ),
@@ -284,7 +285,8 @@ class _BasketPageState extends State<BasketPage> {
                             .map((offer) => OrderedPositionEntity(
                                   productId: offer.product.id!,
                                   quantity: offer.quantity!,
-                                ))
+                                  modifiers: offer.addOptions,
+                        ))
                             .toList(),
                       ),
                     ),

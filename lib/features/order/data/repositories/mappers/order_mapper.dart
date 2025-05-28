@@ -1,12 +1,15 @@
-import '../../../domain/entities/order_created_entity.dart';
+import 'package:monobox/features/order/data/models/basket_modifire_dto.dart';
+import 'package:monobox/features/home/data/repository/mappers/product_option_mapper.dart';
+
 import '../../../domain/entities/order_create_entity.dart';
+import '../../../domain/entities/order_created_entity.dart';
 import '../../models/order_create_request_dto.dart';
 import '../../models/order_create_response_dto.dart';
 
 class OrderMapper {
   static OrderCreateRequestDto toModel(
-    OrderCreateEntity model,
-  ) {
+      OrderCreateEntity model,
+      ) {
     return OrderCreateRequestDto(
       paymentId: model.paymentId,
       deliveryId: model.deliveryId,
@@ -14,49 +17,43 @@ class OrderMapper {
       filialId: model.filialId,
       products: model.orderedPositions
           .map((orderedPosition) => OrderProductDto(
-                id: orderedPosition.productId,
-                quantity: orderedPosition.quantity,
-              ))
+        id: orderedPosition.productId,
+        quantity: orderedPosition.quantity,
+        modifiers: orderedPosition.modifiers
+            ?.map((modifier) => BasketModifireDto(
+          id: modifier.id!,
+          qnt: modifier.quantity ?? 1,
+        ))
+            .toList() ??
+            [],
+      ))
           .toList(),
       completeBefore: model.completeBefore,
       remoteDelivery: model.remoteDelivery,
       moneyChange: model.moneyChange,
-      // customer: model.customer != null
-      //     ? OrderCustomerDto(
-      //         phone: model.customer!.phone,
-      //         name: model.customer!.name,
-      //         surname: model.customer!.surname,
-      //         birthdate: model.customer!.birthdate,
-      //         email: model.customer!.email,
-      //       )
-      //     : null,
-      // address: model.address != null
-      //     ? OrderAddressDto(
-      //         coords: model.address!.coords != null
-      //             ? OrderAddressCoordsDto(
-      //                 x: model.address!.coords!.lat,
-      //                 y: model.address!.coords!.lon,
-      //               )
-      //             : null,
-      //         comment: model.address!.comment,
-      //       )
-      //     : null,
       orderComment: model.comment,
       needCall: model.needCall,
       promocode: model.promocode,
       bonusWithdraw: model.bonusWithdraw,
       gifts: model.gifts
           ?.map((gift) => OrderProductDto(
-                id: gift.productId,
-                quantity: gift.quantity,
-              ))
+        id: gift.productId,
+        quantity: gift.quantity,
+        modifiers: gift.modifiers
+            ?.map((modifier) => BasketModifireDto(
+          id: modifier.id!,
+          qnt: modifier.quantity ?? 1,
+        ))
+            .toList() ??
+            [],
+      ))
           .toList(),
     );
   }
 
   static OrderCreatedEntity toEntity(
-    OrderCreateResponseDto model,
-  ) {
+      OrderCreateResponseDto model,
+      ) {
     return OrderCreatedEntity(
       id: model.id,
       status: model.status,

@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'basket_modifire_dto.dart';
+
 part 'order_create_request_dto.g.dart';
 
 @JsonSerializable(
@@ -57,10 +59,13 @@ class OrderProductDto {
   OrderProductDto({
     required this.id,
     required this.quantity,
+    this.modifiers = const [],
   });
+
   final int id;
   @JsonKey(name: 'qnt')
   final int quantity;
+  final List<BasketModifireDto> modifiers;
 
   factory OrderProductDto.fromJson(Map<String, dynamic> json) => _$OrderProductDtoFromJson(json);
 
@@ -70,7 +75,7 @@ class OrderProductDto {
 
   @override
   String toString() {
-    return "(id: $id, qnt: $quantity )";
+    return "(id: $id, qnt: $quantity, modifiers: $modifiers)";
   }
 }
 

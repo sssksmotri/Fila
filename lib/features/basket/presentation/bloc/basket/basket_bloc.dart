@@ -331,7 +331,6 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
         offer = element;
       }
     }
-    print('Updating basket with offer: $offer');
     return offer;
   }
 
@@ -433,6 +432,7 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   void _onUpdateOffer(UpdateOffer event, Emitter<BasketState> emit) {
     if (state is BasketLoaded) {
       try {
+        _addBasketItemUseCase(params: event.offer);
         final BasketEntity basket = (state as BasketLoaded).basket;
         final offers = List<BasketOfferEntity>.from(basket.offers);
 

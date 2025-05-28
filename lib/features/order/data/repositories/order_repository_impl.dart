@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:decimal/decimal.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
@@ -37,17 +39,16 @@ class OrderRepositoryImpl implements OrderRepository {
 
   @override
   Future<DataState<OrderCreatedEntity>?> createOrder(
-    OrderCreateEntity orderEntity,
-  ) async {
-    OrderCreateResponseDto orderCreated = await service.create(
-      OrderMapper.toModel(
-        orderEntity,
-      ),
-    );
-
-    return DataSuccess(
-      OrderMapper.toEntity(orderCreated),
-    );
+      OrderCreateEntity orderEntity,
+      ) async {
+    try {
+      final orderDto = OrderMapper.toModel(orderEntity);
+      OrderCreateResponseDto orderCreated = await service.create(orderDto);
+      return DataSuccess(OrderMapper.toEntity(orderCreated));
+    } on DioException catch (e) {
+      print('DioException in createOrder: ${e.message}');
+      return DataFailed(e);
+    }
   }
 
   @override

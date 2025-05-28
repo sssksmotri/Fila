@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:monobox/features/home/domain/entities/option_entity.dart';
 
 import 'address_entity.dart';
 import 'ordered_position_entity.dart';
@@ -19,7 +20,7 @@ class OrderCreateEntity extends Equatable {
   final bool? needCall;
   final String? promocode;
   final String? bonusWithdraw;
-
+  final List<ProductOptionEntity>? modifiers;
   const OrderCreateEntity({
     required this.paymentId,
     required this.deliveryId,
@@ -36,6 +37,7 @@ class OrderCreateEntity extends Equatable {
     this.needCall,
     this.promocode,
     this.bonusWithdraw,
+    this.modifiers,
   });
 
   @override

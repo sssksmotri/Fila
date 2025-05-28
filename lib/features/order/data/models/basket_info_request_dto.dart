@@ -22,7 +22,9 @@ class BasketInfoRequestDto {
   factory BasketInfoRequestDto.fromJson(Map<String, dynamic> json) => _$BasketInfoRequestDtoFromJson(json);
 
   Map<String, dynamic> toJson() {
-    return _$BasketInfoRequestDtoToJson(this);
+    final result = _$BasketInfoRequestDtoToJson(this);
+    print('BasketInfoRequestDto: Serializing to JSON: $result');
+    return result;
   }
 
   @override

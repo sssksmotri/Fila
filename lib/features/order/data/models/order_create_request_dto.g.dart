@@ -50,12 +50,18 @@ OrderProductDto _$OrderProductDtoFromJson(Map<String, dynamic> json) =>
     OrderProductDto(
       id: (json['id'] as num).toInt(),
       quantity: (json['qnt'] as num).toInt(),
+      modifiers: (json['modifiers'] as List<dynamic>?)
+              ?.map(
+                  (e) => BasketModifireDto.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$OrderProductDtoToJson(OrderProductDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'qnt': instance.quantity,
+      'modifiers': instance.modifiers,
     };
 
 OrderCustomerDto _$OrderCustomerDtoFromJson(Map<String, dynamic> json) =>

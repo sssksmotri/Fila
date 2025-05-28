@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:monobox/features/home/domain/entities/modifier_entity.dart';
 import 'package:monobox/features/home/domain/entities/option_entity.dart';
+import 'package:rxdart/rxdart.dart';
+import '../../../../basket/domain/entities/basket_offer_entity.dart';
 import '../../../domain/entities/modifier_item_entity.dart';
 import '../../../domain/entities/product_entity.dart';
 import '../../../../basket/presentation/bloc/basket/basket_bloc.dart';
@@ -11,6 +13,8 @@ part 'product_card_state_state.dart';
 part 'product_card_state_cubit.freezed.dart';
 
 class ProductCardStateCubit extends Cubit<ProductCardStateState> {
+  final _updateBasketController = PublishSubject<BasketOfferEntity>();
+
   ProductCardStateCubit(
       this.product, {
         Map<int, int>? initialQuantities,
@@ -18,11 +22,23 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       }) : super(ProductCardStateState(
     product: product,
     selectedQuantities: initialQuantities ?? {},
-  ));
+  )) {
+    // Настройка debouncing для обновления корзины
+    _updateBasketController
+        .debounceTime(const Duration(milliseconds: 300))
+        .listen((offer) {
+      basketBloc?.add(UpdateOffer(offer));
+    });
+  }
 
   final ProductEntity product;
   final BasketBloc? basketBloc;
 
+  @override
+  Future<void> close() {
+    _updateBasketController.close();
+    return super.close();
+  }
 
   void _updateBasket() {
     if (basketBloc == null) return;
@@ -32,7 +48,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
         addOptions: getSelectedOptions(),
       );
       print('Updating basket with offer: $updatedOffer');
-      basketBloc!.add(UpdateOffer(updatedOffer));
+      _updateBasketController.add(updatedOffer); // Добавляем в поток с debouncing
     }
   }
 
@@ -44,9 +60,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       }
     }
     emit(state.copyWith(selectedQuantities: newQuantities));
-
   }
-
 
   void incrementModifier(ModifierItemEntity item) {
     final current = state.selectedQuantities[item.id] ?? 0;
@@ -55,7 +69,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       final newQuantities = Map<int, int>.from(state.selectedQuantities);
       newQuantities[item.id] = current + 1;
       emit(state.copyWith(selectedQuantities: newQuantities));
-      /*_updateBasket();*/
+      _updateBasket();
     }
   }
 
@@ -70,7 +84,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
         newQuantities.remove(item.id);
       }
       emit(state.copyWith(selectedQuantities: newQuantities));
-     /* _updateBasket();*/
+      _updateBasket();
     }
   }
 
@@ -81,7 +95,7 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
       final newQuantities = Map<int, int>.from(state.selectedQuantities);
       newQuantities[item.id] = current + 1;
       emit(state.copyWith(selectedQuantities: newQuantities));
-      /*_updateBasket();*/
+      _updateBasket();
     }
   }
 
@@ -90,28 +104,27 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
     newQuantities[item.id] = quantity.clamp(0, item.maxQuantity ?? 10);
     emit(state.copyWith(selectedQuantities: newQuantities));
     print('Set modifier ${item.id} to quantity $quantity, new quantities: $newQuantities');
+    _updateBasket();
   }
 
   void addUniqModifier(ModifierItemEntity item, List<ModifierItemEntity> modifierItems) {
     final newQuantities = Map<int, int>.from(state.selectedQuantities);
-
     for (var modItem in modifierItems) {
       newQuantities.remove(modItem.id);
     }
-
     final max = item.maxQuantity ?? 1;
     if ((newQuantities[item.id] ?? 0) < max) {
       newQuantities[item.id] = 1;
     }
     emit(state.copyWith(selectedQuantities: newQuantities));
-    /*_updateBasket();*/
+    _updateBasket();
   }
 
   void deleteModifier(ModifierItemEntity item) {
     final newQuantities = Map<int, int>.from(state.selectedQuantities);
     newQuantities.remove(item.id);
     emit(state.copyWith(selectedQuantities: newQuantities));
-    /*_updateBasket();*/
+    _updateBasket();
   }
 
   Decimal _getProductPrice() {
@@ -165,7 +178,6 @@ class ProductCardStateCubit extends Cubit<ProductCardStateState> {
         .where((item) => state.selectedQuantities.containsKey(item.id) && state.selectedQuantities[item.id]! > 0)
         .toList();
   }
-
 
   List<ProductOptionEntity> getSelectedOptions() {
     final List<ProductOptionEntity> selectedOptions = [];

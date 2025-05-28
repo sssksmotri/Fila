@@ -16,6 +16,8 @@ class ProductModifier extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCardStateCubit, ProductCardStateState>(
+      buildWhen: (previous, current) =>
+      previous.selectedQuantities != current.selectedQuantities,
       builder: (context, state) {
         final cubit = context.read<ProductCardStateCubit>();
         final modifiers = product.modifiers
@@ -27,13 +29,11 @@ class ProductModifier extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: modifiers.map((modifier) {
             final selected = cubit.selectedModifiersByParent(modifier);
-            final totalSelectedQuantity = modifier.items
-                .fold<int>(
+            final totalSelectedQuantity = modifier.items.fold<int>(
               0,
                   (sum, item) => sum + (state.selectedQuantities[item.id] ?? 0),
             );
             if (modifier.type == 'switcher') {
-
               if (selected.isEmpty && modifier.items.isNotEmpty) {
                 cubit.addModifier(modifier.items[0]);
               }
@@ -57,7 +57,6 @@ class ProductModifier extends StatelessWidget {
                 ),
               );
             }
-
 
             final hasImages = modifier.items.any((i) => i.image != null && i.image!.isNotEmpty);
 
@@ -98,7 +97,9 @@ class ProductModifier extends StatelessWidget {
                             final disabled = modifier.maxQuantity != null &&
                                 totalSelectedQuantity >= modifier.maxQuantity! &&
                                 quantity == 0 &&
-                                selected.every((sel) => (state.selectedQuantities[sel.id] ?? 0) <= (sel.minQuantity ?? 0));
+                                selected.every((sel) =>
+                                (state.selectedQuantities[sel.id] ?? 0) <=
+                                    (sel.minQuantity ?? 0));
 
                             return Padding(
                               padding: const EdgeInsets.only(right: 12),
@@ -108,7 +109,8 @@ class ProductModifier extends StatelessWidget {
                                 padding: const EdgeInsets.all(12),
                                 decoration: BoxDecoration(
                                   color: AppColors.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(AppStyles.mediumRadius)),
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(AppStyles.mediumRadius)),
                                   boxShadow: [
                                     BoxShadow(
                                       color: AppColors.black.withOpacity(0.05),
@@ -121,7 +123,8 @@ class ProductModifier extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     ClipRRect(
-                                      borderRadius: BorderRadius.all(Radius.circular(AppStyles.productPicRadius)),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(AppStyles.productPicRadius)),
                                       child: CachedNetworkImage(
                                         imageUrl: item.image ?? '',
                                         width: 110,
@@ -129,8 +132,8 @@ class ProductModifier extends StatelessWidget {
                                         fit: BoxFit.cover,
                                         placeholder: (_, __) => Container(
                                             width: 110, height: 90, color: AppColors.shimmer),
-                                        errorWidget: (_, __, ___) =>
-                                            Container(width: 110, height: 90, color: AppColors.shimmer),
+                                        errorWidget: (_, __, ___) => Container(
+                                            width: 110, height: 90, color: AppColors.shimmer),
                                       ),
                                     ),
                                     const SizedBox(height: 4),
@@ -170,7 +173,9 @@ class ProductModifier extends StatelessWidget {
                                       height: 26,
                                       child: quantity == 0
                                           ? ElevatedButton(
-                                        onPressed: !disabled ? () => cubit.incrementModifier(item) : null,
+                                        onPressed: !disabled
+                                            ? () => cubit.incrementModifier(item)
+                                            : null,
                                         style: AppStyles.greyElevatedButton.copyWith(
                                           padding: const MaterialStatePropertyAll(
                                             EdgeInsets.only(left: 20, right: 16),
@@ -228,7 +233,9 @@ class ProductModifier extends StatelessWidget {
                                             Expanded(
                                               child: GestureDetector(
                                                 onTap: quantity < maxQty &&
-                                                    (modifier.maxQuantity == null || totalSelectedQuantity < modifier.maxQuantity!)
+                                                    (modifier.maxQuantity == null ||
+                                                        totalSelectedQuantity <
+                                                            modifier.maxQuantity!)
                                                     ? () {
                                                   cubit.incrementModifier(item);
                                                 }
@@ -265,7 +272,8 @@ class ProductModifier extends StatelessWidget {
                               totalSelectedQuantity >= modifier.maxQuantity! &&
                               !isSelected &&
                               selected.every((sel) =>
-                              (state.selectedQuantities[sel.id] ?? 0) <= (sel.minQuantity ?? 0));
+                              (state.selectedQuantities[sel.id] ?? 0) <=
+                                  (sel.minQuantity ?? 0));
 
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
