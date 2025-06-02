@@ -8,7 +8,7 @@ variables:
   FLUTTER_VERSION: "stable"
   LANG: en_US.UTF-8
   LC_ALL: en_US.UTF-8
-  FLUTTER_IMAGE: "ghcr.io/cirruslabs/flutter:3.27.3"
+  FLUTTER_IMAGE: "ghcr.io/cirruslabs/flutter:3.32.1"
   ANDROID_COMPILE_SDK: "34"
   ANDROID_BUILD_TOOLS: "34.0.0"
   ANDROID_SDK_HOME: "/android-sdk"
@@ -25,13 +25,11 @@ variables:
 default:
   image: $FLUTTER_IMAGE
 
-# Установка зависимостей для образа
 .before_script_common:
   before_script:
     - apt-get update
     - apt-get install -y libffi-dev bundler
 
-# Проверка качества кода
 code_quality:
   stage: code_quality
   script:
@@ -45,7 +43,7 @@ code_quality:
     reports:
       codequality: gl-code-quality-report.json
 
-# Сборка Android
+
 build_android:
   stage: build_android
   extends: .before_script_common
@@ -53,7 +51,6 @@ build_android:
     - apt update && apt install -y curl
     - curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
     - mv /builds/monobox1/app/cosfoodmos.jks /builds/monobox1/app/android/$ANDROID_KEY_NAME
-    # Проверим, какие файлы скачались
     - ls -la /builds/monobox1/app/
     - ls -la /builds/monobox1/app/android/
     - ls -la /builds/monobox1/app/android/app/
@@ -70,7 +67,7 @@ build_android:
 
 
 
-# Деплой Android
+
 deploy_android:
   stage: deploy_android
   extends: .before_script_common
