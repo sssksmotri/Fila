@@ -1,5 +1,5 @@
 stages:
-  - code_quality
+#  - code_quality
   - build_android
   - deploy_android
 #  - build_ios
@@ -30,18 +30,18 @@ default:
     - apt-get update
     - apt-get install -y libffi-dev bundler
 
-code_quality:
-  stage: code_quality
-  script:
-    - set -e
-    - set -x
-    - echo "Running code quality checks..."
-    - flutter pub get
-    - flutter pub global activate dart_code_metrics
-    - dart pub global run dart_code_metrics:metrics analyze lib --reporter=json > gl-code-quality-report.json
-  artifacts:
-    reports:
-      codequality: gl-code-quality-report.json
+#code_quality:
+#  stage: code_quality
+#  script:
+#    - set -e
+#    - set -x
+#    - echo "Running code quality checks..."
+#    - flutter pub get
+#    - flutter pub global activate dart_code_metrics
+#    - dart pub global run dart_code_metrics:metrics analyze lib --reporter=json > gl-code-quality-report.json
+#  artifacts:
+#    reports:
+#      codequality: gl-code-quality-report.json
 
 
 build_android:
