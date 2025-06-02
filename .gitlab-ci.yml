@@ -18,7 +18,7 @@ variables:
   ANDROID_KEY_ALIAS: "fila"
   ANDROID_KEY_PASSWORD: "flutter_fila"
   ANDROID_KEY_NAME: "fila.jks"
-  BRANCH_NAME: "fila"
+  BRANCH_NAME: "Fila"
 
 
 
