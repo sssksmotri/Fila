@@ -58,11 +58,12 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   late TextEditingController cashPropouseTextController;
   late TextEditingController promoTextController;
   late SheetController sheetController;
-
+  late TextEditingController commentController;
   @override
   void initState() {
     sheetController = SheetController();
     cashPropouseTextController = TextEditingController();
+    commentController = TextEditingController();
     promoTextController = TextEditingController()
       ..setText(
           (getIt<BasketBloc>().state is BasketLoaded && (getIt<BasketBloc>().state as BasketLoaded).basket.promocode != null) ? (getIt<BasketBloc>().state as BasketLoaded).basket.promocode! : '');
@@ -465,7 +466,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   const SizedBox(
                     height: 8,
                   ),
-                  const Comment(),
+                   Comment(controller: commentController),
                   const SizedBox(
                     height: 8,
                   ),
@@ -583,6 +584,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                                     promocode: (basketBloc.state as BasketLoaded).basket.promocode,
                                                     moneyChange: (basketBloc.state as BasketLoaded).basket.moneyChange,
                                                     bonusWithdraw: bonusWithdraw,
+                                                    orderComment: commentController.text,
                                                   ),
                                             );
                                         // Navigator.of(context).push(

@@ -7,7 +7,10 @@ import '../../../../core/widgets/text_area.dart';
 class Comment extends StatelessWidget {
   const Comment({
     super.key,
+    required this.controller,
   });
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -16,16 +19,15 @@ class Comment extends StatelessWidget {
         'Комментарий',
         style: AppStyles.headline,
       ),
-      child: const Column(
+      child: Column(
         children: [
-          SizedBox(
-            height: 16,
-          ),
+          const SizedBox(height: 16),
           TextArea(
-            scrollPadding: EdgeInsets.only(bottom: 220),
+            scrollPadding: const EdgeInsets.only(bottom: 220),
+            controller: controller,
             maxLines: 2,
             maxLength: 150,
-            hintText: 'Напишите пожелания или пояснения\nк вашему заказу',
+            hintText: 'Напишите пожелания или пояснения\nк вашему заказу',
           ),
         ],
       ),

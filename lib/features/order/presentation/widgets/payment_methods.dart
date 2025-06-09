@@ -149,7 +149,7 @@ class PaymentMethods extends StatelessWidget {
             ),
             BlocBuilder<CreateOrderStateCubit, CreateOrderState>(
               builder: (context, state) {
-                if (state.paymentMethodIndex == 1) {
+                if (state.paymentMethodIndex == 2) {
                   return Container(
                     padding: const EdgeInsets.only(
                       left: 16,

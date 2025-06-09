@@ -74,6 +74,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
     String? promocode,
     bool? needCall,
     String? bonusWithdraw,
+    String? orderComment,
   }) {
     return OrderCreateEntity(
       paymentId: paymentMethod.id,
@@ -88,6 +89,7 @@ class OrderBloc extends Bloc<OrderEvent, OrderState> {
       promocode: promocode,
       needCall: needCall,
       bonusWithdraw: bonusWithdraw,
+      comment: orderComment,
     );
   }
 
