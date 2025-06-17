@@ -15,10 +15,10 @@ variables:
   GRADLE_USER_HOME: "/root/.gradle"
   FASTLANE_DISABLE_COLORS: "1"
   SECURE_FILES_DOWNLOAD_PATH: './'
-  ANDROID_KEY_ALIAS: "fila"
-  ANDROID_KEY_PASSWORD: "flutter_fila"
-  ANDROID_KEY_NAME: "fila.jks"
-  BRANCH_NAME: "Fila"
+  ANDROID_KEY_ALIAS: "mexico_babushka"
+  ANDROID_KEY_PASSWORD: "flutter_mexico_babushka"
+  ANDROID_KEY_NAME: "mexico_babushka.jks"
+  BRANCH_NAME: "Mexico_babushka"
 
 
 

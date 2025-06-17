@@ -16,7 +16,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "app.monobox.mobile.fila"
+    namespace = "app.monobox.mobile.meksikanbabushka"
     compileSdk = flutter.compileSdkVersion
     ndkVersion "25.1.8937393"
 
@@ -31,7 +31,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "app.monobox.mobile.fila"
+        applicationId = "app.monobox.mobile.meksikanbabushka"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const Color lightSeedColor = Color(0xFFfc7207);
-  static const Color lightPrimary = Color(0xFFfc7207);
+  static const Color lightSeedColor = Color(0xFF790707);
+  static const Color lightPrimary = Color(0xFF790707);
   static const Color lightSecondary = Color(0xFFADADAD);
   static const Color lightTertiary = Color(0xFFC0C0C0);
   static const Color lightBackground = Colors.white;
@@ -20,8 +20,8 @@ class AppColors {
   static const Color destructive = Color(0xFFD94545);
   static const Color positive = Color(0xFF27A646);
 
-  static const Color darkSeedColor = Color(0xFF30FF51);
-  static const Color darkPrimary = Color(0xFFDD6910);
+  static const Color darkSeedColor = Color(0xFFE52F2F);
+  static const Color darkPrimary = Color(0xFFE52F2F);
   static const Color darkSecondary = Color(0xFFADADAD);
   static const Color darkTertiary = Color(0xFF4A4A4A);
   static const Color darkBackground = Color(0xFF222222);

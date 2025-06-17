@@ -175,6 +175,7 @@ DEPENDENCIES:
   - wakelock_plus (from `.symlinks/plugins/wakelock_plus/ios`)
   - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
   - yandex_mapkit (from `.symlinks/plugins/yandex_mapkit/ios`)
+  - YandexMapsMobile
 
 SPEC REPOS:
   trunk:
@@ -288,6 +289,6 @@ SPEC CHECKSUMS:
   yandex_mapkit: d9c479705f0f3888a3fc67b0d9c6156108e74270
   YandexMapsMobile: 7e20ef4db180b901c96f8107fade91d6349248a0
 
-PODFILE CHECKSUM: 7be2f5f74864d463a8ad433546ed1de7e0f29aef
+PODFILE CHECKSUM: 5c6ad695f2a794d6712c6e90237982f99ecad941
 
 COCOAPODS: 1.16.2
