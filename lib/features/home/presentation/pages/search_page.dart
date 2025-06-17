@@ -424,7 +424,7 @@ class _SearchPageState extends State<SearchPage> {
                           //childAspectRatio: (1 / 1.75),
                           //childAspectRatio: (158 / 308),
                           //childAspectRatio: 158 / ((308 - 24 + 8 + 4)),
-                          height: 308,
+                          height: 328,
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           final ProductEntity product = products[index];

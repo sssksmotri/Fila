@@ -1,15 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:monobox/config/routes/app_router.dart';
-
 import '../../../../config/themes/colors.dart';
 import '../../../../config/themes/styles.dart';
 import '../../../../injection_container.dart';
 import '../bloc/childrens/childrens_bloc.dart';
-import '../widgets/add_child_list.dart';
 import '../widgets/childrens_list.dart';
 import '../widgets/rules_link.dart';
 
@@ -34,10 +31,7 @@ class ChildrensPage extends StatelessWidget {
             BoxShadow(
               color: AppColors.white.withOpacity(.05),
               blurRadius: 8.0,
-              offset: const Offset(
-                0.0,
-                4.0,
-              ),
+              offset: const Offset(0.0, 4.0),
             )
           ],
         ),
@@ -56,9 +50,7 @@ class ChildrensPage extends StatelessWidget {
               child: Center(
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 16,
-                    ),
+                    const SizedBox(width: 16),
                     SizedBox(
                       width: 17.33,
                       height: 12.67,
@@ -94,9 +86,7 @@ class ChildrensPage extends StatelessWidget {
     );
   }
 
-  Widget _buildBody(
-    BuildContext context,
-  ) {
+  Widget _buildBody(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
@@ -115,27 +105,36 @@ class ChildrensPage extends StatelessWidget {
           );
         },
         builder: (context, state) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: RulesLink(),
-                ),
-                const SizedBox(height: 16),
-                state.maybeWhen(
-                  //done: (childrens) => childrens.isEmpty ? const AddChildList() : ChildrensList(childrens: childrens),
-                  done: (childrens) => childrens.isEmpty ? Container() : ChildrensList(childrens: childrens),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                    ),
+          return state.maybeWhen(
+            done: (childrens) {
+              if (childrens.isEmpty) {
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
                   ),
-                  orElse: () => Container(),
-                ),
-              ],
+                );
+              } else {
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: RulesLink(),
+                      ),
+                      const SizedBox(height: 16),
+                      ChildrensList(childrens: childrens),
+                    ],
+                  ),
+                );
+              }
+            },
+            loading: () => const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+              ),
             ),
+            orElse: () => const SizedBox.shrink(),
           );
         },
       ),

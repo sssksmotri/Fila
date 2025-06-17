@@ -12,7 +12,7 @@ FilialDto _$FilialDtoFromJson(Map<String, dynamic> json) => FilialDto(
       name: json['title'] as String,
       coordinates:
           FilialCoordinatesDto.fromJson(json['coords'] as Map<String, dynamic>),
-      timeDelay: (json['time_delay'] as num?)?.toInt(),
+      timeDelay: FilialDto._timeDelayFromJson(json['time_delay']),
       distance: json['distance'] as String?,
       rezhim: (json['rezhim'] as List<dynamic>?)
           ?.map((e) => e as Map<String, dynamic>)

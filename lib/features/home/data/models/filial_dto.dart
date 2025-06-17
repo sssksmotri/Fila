@@ -27,7 +27,8 @@ class FilialDto {
   final int? cityId;
   @JsonKey(name: 'title')
   final String name;
-  final int? timeDelay;
+  @JsonKey(fromJson: _timeDelayFromJson)
+  final String? timeDelay;
   final String? distance;
   @JsonKey(name: 'coords')
   final FilialCoordinatesDto coordinates;
@@ -44,6 +45,13 @@ class FilialDto {
   final int? endTodayTimestamp;
 
   factory FilialDto.fromJson(Map<String, dynamic> json) => _$FilialDtoFromJson(json);
+
+  static String? _timeDelayFromJson(dynamic value) {
+    if (value == null) return null;
+    if (value is String) return value;
+    if (value is int) return value.toString();
+    throw FormatException('Expected a String or int for timeDelay, got $value');
+  }
 }
 
 @JsonSerializable(
@@ -67,6 +75,6 @@ class FilialCoordinatesDto {
   static double _stringToDouble(dynamic value) {
     if (value is num) return value.toDouble();
     if (value is String) return double.parse(value);
-    throw FormatException('Expected a string or number for coordinate, got $value');
+    throw FormatException('Expected a String or number for coordinate, got $value');
   }
 }

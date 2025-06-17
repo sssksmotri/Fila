@@ -3,13 +3,11 @@ import '../../models/filial_dto.dart';
 
 class FilialMapper {
   static ShopEntity toEntity(FilialDto model) {
-    // Формируем список workTime из rezhim
     final List<String> workTime = model.rezhim?.map((rezhimMap) {
       final days = rezhimMap['days'] as String? ?? '';
       final time = rezhimMap['time'] as String? ?? '';
       return '$days $time';
-    }).toList() ??
-        [];
+    }).toList() ?? [];
 
     return ShopEntity(
       id: model.id,
@@ -19,12 +17,18 @@ class FilialMapper {
       lon: model.coordinates.lon,
       openTime: model.rezhimToday,
       workTime: workTime,
-      waitingTime: model.timeDelay,
+      waitingTime: parseTimeDelay(model.timeDelay),
       distance: model.distance,
     );
   }
 
   static List<ShopEntity> toEntities(List<FilialDto> models) {
     return models.map((model) => toEntity(model)).toList();
+  }
+
+  static int? parseTimeDelay(String? timeDelay) {
+    if (timeDelay == null) return null;
+    final match = RegExp(r'\d+').firstMatch(timeDelay);
+    return match != null ? int.tryParse(match.group(0)!) : null;
   }
 }
